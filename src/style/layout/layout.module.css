@@ -1,0 +1,267 @@
+.header {
+  position: relative;
+  padding: 10px;
+  top: 0;
+
+  left: 0;
+  z-index: 1;
+  width: 100%;
+}
+.header_ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header_user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.header_btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.myCurrency {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.myCurrency img {
+  width: 20px;
+}
+.myCurrency span {
+  color: #fff;
+}
+.user_info {
+  display: flex;
+  flex-direction: column;
+}
+.user_level {
+  font-weight: bold;
+  font-size: 22px;
+}
+.feed {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+}
+
+.feed_img {
+  width: 18px;
+}
+
+.footer .list,
+.header .list {
+  width: 50px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.footer .list img,
+.header .list img {
+  width: 50px;
+  margin: 0 auto;
+}
+.backgrund {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.backgrund img {
+  height: 100%;
+  object-fit: cover;
+}
+.customize {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.footer {
+  width: 100%;
+  height: 60px;
+  /* box-shadow: 0 0px 10px 1px rgba(0, 0, 0, 0.1); */
+
+  /* background-color: #fff; */
+  /* position: relative; */
+  position: absolute;
+  bottom: 10px;
+  /* left: 50%; */
+  z-index: 2;
+  /* transform: translate(-50%, 0); */
+}
+.footer_ul {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+.footer_list {
+  width: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer_list_img {
+  width: 45px;
+  position: relative;
+}
+
+.count {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  font-size: 14px;
+  transform: translate(-50%, 0%);
+  font-weight: bold;
+  color: #000;
+  border-radius: 50px;
+  width: 100%;
+  height: 25px;
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 226, 59);
+}
+.animals_wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  width: 100%;
+  height: auto;
+}
+.animal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+}
+
+/* point */
+.point_wrap {
+  padding: 10px;
+  border: 1px solid rgb(60, 72, 112);
+  background-color: rgb(60, 72, 112, 0.1);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.my_point {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.my_point_text {
+  font-size: 20px;
+}
+.point img {
+  width: 15px;
+}
+.point {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* shopAd */
+
+.shopad_wrap {
+  border-radius: 20px;
+  background-color: rgb(var(--color-9));
+  padding: 40px 20px;
+}
+.shopad h3 {
+  white-space: pre;
+  line-height: 1.3;
+}
+.shop_category_wrap {
+  height: 100%;
+}
+.shop_category {
+  height: 100%;
+  container-type: inline-size;
+}
+.shop_category h3 {
+  margin-bottom: 20px;
+}
+.shop_category_ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  height: 95cqi;
+  gap: 10px;
+}
+.shop_category_ul li {
+  border-radius: 20px;
+  position: relative;
+  background-color: rgb(var(--color-9));
+
+  overflow: hidden;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.shop_category_ul li.colors {
+  background-color: rgb(var(--color-1));
+}
+.shop_category_img svg {
+  width: 35px;
+  height: 35px;
+}
+
+.commin_soon {
+  width: 100%;
+  height: 100%;
+  background-color: #000000b7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+
+  left: 0;
+
+  font-size: 20px;
+}
+.commin_soon span {
+  font-weight: bold;
+  color: #fff;
+  font-size: 4cqi;
+}

@@ -1,0 +1,60 @@
+.sleep_wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.sleep_score {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sleep_score span {
+  font-size: 18px;
+}
+.score_ul {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.sleep_score_bar {
+  height: 10px;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  overflow: hidden;
+  width: 100%;
+}
+.sleep_score_innerbar {
+  width: 0%;
+  height: 100%;
+  border-radius: 50px;
+  background: linear-gradient(to right, #ffedbc, #ed4264);
+}
+.score_btns {
+  /* min-height: 40px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sleep_exp {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sleep_exp span {
+  font-weight: 600;
+}
+.sleep_exp span:nth-child(2) {
+  font-size: 14px;
+  font-weight: bold;
+}
