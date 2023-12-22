@@ -19,7 +19,10 @@ export default function Header() {
 
   return (
     <header className={layoutStyle.header}>
-      <ul className={layoutStyle.header_ul}>
+      <div className={layoutStyle.header_ul}>
+        {HeaderList.map((list, idx) => (
+          <HeaderListUi list={list} key={`${list.name}_header_ui_${idx}`} />
+        ))}
         <div className={layoutStyle.header_user}>
           <div className={layoutStyle.myCurrency}>
             <img src={stone} alt="수면포인트" />
@@ -30,10 +33,7 @@ export default function Header() {
             <span>{userData.currency.toLocaleString()}</span>
           </div>
         </div>
-        {HeaderList.map((list, idx) => (
-          <HeaderListUi list={list} key={`${list.name}_header_ui_${idx}`} />
-        ))}
-      </ul>
+      </div>
     </header>
   );
 }

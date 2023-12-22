@@ -21,6 +21,7 @@ import { nextLevel } from "../../../Fn/nextLevel";
 import UpdateNextLevelExp from "../../../Fn/UpdateNextLevelExp";
 import UpdateNextCurrency from "../../../Fn/UpdateNextCurrency";
 import useUpdate from "../../../hooks/useUpdate";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function EvolutionBtns({
   albeEat,
@@ -33,6 +34,7 @@ export default function EvolutionBtns({
   text: string;
   type: string;
 }) {
+  const queryClient = useQueryClient();
   const { mutate: evolutionMutate } = useUpdate({ url: "" });
   const [levelStatus, setLevelStatus] = useRecoilState(AtomLevelStatus);
   const [myCharacter, setMyCharacter] = useRecoilState(AtomMyCharacter);
@@ -276,6 +278,11 @@ export default function EvolutionBtns({
               console.log("default");
               return;
           }
+        },
+        onSettled: () => {
+          queryClient.invalidateQueries({
+            queryKey: ["/api/main"],
+          });
         },
       }
     );

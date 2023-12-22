@@ -77,8 +77,7 @@ export default function Home() {
         return <AlarmTab HeaderTabDatas={HeaderTabDatas["alarm"]} />;
       case "friend":
         return <FriendTab HeaderTabDatas={HeaderTabDatas["friend"]} />;
-      case "addFriend":
-        return <AddFriend HeaderTabDatas={HeaderTabDatas["addFriend"]} />;
+
       case "shop":
         return <ShopTab tabDatas={HeaderTabDatas["shop"]} />;
       case "emotion_inventory":

@@ -10,6 +10,7 @@ import ClickButton from "../../buttons/ClickButton";
 import axios from "axios";
 import { APIS } from "../../../ennum";
 import { useLocation, useSearchParams } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function FriendInvite() {
   const location = useLocation();
@@ -18,7 +19,7 @@ export default function FriendInvite() {
   const setLoading = useSetRecoilState(AtomLoading);
   const [code, setCode] = useState<string>("");
   const setPopup = useSetRecoilState(AtomLevelPopup);
-
+  const queryClient = useQueryClient();
   const { addAlarmHandler } = useAlarm();
   const { mutate } = useUpdate({ url: "/api/friend/register" });
   const inviteHandler = (e: SubmitType) => {
@@ -39,6 +40,14 @@ export default function FriendInvite() {
           setPopup({ text: "초대되었습니다.", popup: true });
           // addAlarmHandler({ meg: "친구가 추가되었습니다." });
           setLoading(false);
+        },
+        onSettled: () => {
+          queryClient.invalidateQueries({
+            queryKey: ["/api/friend/list"],
+          });
+          queryClient.invalidateQueries({
+            queryKey: ["/api/alarm/list"],
+          });
         },
       }
     );

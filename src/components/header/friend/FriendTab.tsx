@@ -23,7 +23,7 @@ export default function FriendTab({
 }: {
   HeaderTabDatas: { [key: string]: string };
 }) {
-  const { data: friendApprovalData, isFetching: isLoadingFriendApprovalData } =
+  const { data: friendApprovalData, isLoading: isLoadingFriendApprovalData } =
     useGetAxios({
       url: "/api/friend/list",
       params: { status: "approval" },

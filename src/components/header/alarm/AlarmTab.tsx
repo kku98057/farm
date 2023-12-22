@@ -12,12 +12,14 @@ import { ClickType } from "../../../types";
 import { AlarmType } from "../../../types";
 import TabTop from "../../layout/TabTop";
 import BackButton from "../../buttons/BackButton";
+import useGetAxios from "../../../hooks/useGetAxios";
 
 export default function AlarmTab({
   HeaderTabDatas,
 }: {
   HeaderTabDatas: { [key: string]: string };
 }) {
+  const { data, isLoading } = useGetAxios({ url: "/api/alarm/list" });
   const [alarmList, setAlarmList] = useRecoilState(AtomAlarmList);
   const setAlarmLength = useSetRecoilState(AtomAlarmLength);
   const setAlarmReadLength = useSetRecoilState(AtomAlarmReadLength);
@@ -47,45 +49,54 @@ export default function AlarmTab({
       );
     return;
   };
-  const allDeleteHandler = () => {
-    setAlarmList([]);
-  };
-  const allReadHandler = () => {
-    setAlarmList((prev: any) =>
-      prev.map((item: any) => ({ ...item, is_read: true }))
-    );
-  };
+  // const allDeleteHandler = () => {
+  //   setAlarmList([]);
+  // };
+  // const allReadHandler = () => {
+  //   setAlarmList((prev: any) =>
+  //     prev.map((item: any) => ({ ...item, is_read: true }))
+  //   );
+  // };
+  useEffect(() => {
+    if (data && !isLoading) {
+    }
+    // setAlarmList((prev: any) =>
+    //   prev.map((item: any) => ({ ...item, is_read: true }))
+    // );
+  }, [data, isLoading]);
   return (
     <div className={tabStyle.tab_wrap}>
       <BackButton back="" title="알람" />
 
       <div className={`${tabStyle.tab_inner} `}>
-        {alarmList.length > 0 ? (
+        {!isLoading && data && (
           <ul className={tabStyle.alarm_tab_inner}>
-            {alarmList.map((list, idx) => (
-              <AlarmList
-                list={list}
-                idx={idx}
-                key={`${list.message}_${list.time}_${idx}`}
-                deleteAlarmHandler={deleteAlarmHandler}
-                readAlarmHandler={readAlarmHandler}
-              />
-            ))}
+            {data.list.length > 0 ? (
+              data.list.map((list: AlarmType, idx: number) => (
+                <AlarmList
+                  list={list}
+                  idx={idx}
+                  key={`${list.message}_${list.change_time}_${idx}`}
+                  deleteAlarmHandler={deleteAlarmHandler}
+                  readAlarmHandler={readAlarmHandler}
+                />
+              ))
+            ) : (
+              <p
+                style={{
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                알람이 없습니다.
+              </p>
+            )}
           </ul>
-        ) : (
-          <p
-            style={{
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            알람이 없습니다.
-          </p>
         )}
       </div>
-      <div className="btns2">
+      {/* <div className="btns2">
         <ClickButton
           className={buttonStyle.timerBtn}
           text="모두 읽음"
@@ -96,7 +107,7 @@ export default function AlarmTab({
           text="전체삭제"
           clickHandler={allDeleteHandler}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -112,16 +123,17 @@ const AlarmList = ({
   deleteAlarmHandler: (e: any, list: AlarmType, idx: number) => void;
   readAlarmHandler: (e: any, list: AlarmType, idx: number) => void;
 }) => {
+  // ${
+  //   list.is_read === false ? `${tabStyle.active}` : ""
+  // }
   return (
     <li
       onClick={(e) => readAlarmHandler(e, list, idx)}
-      className={`${tabStyle.alarm_list} ${
-        list.is_read === false ? `${tabStyle.active}` : ""
-      }`}
+      className={`${tabStyle.alarm_list}  `}
     >
       <div className={tabStyle.alarm_list_des}>
         <h4>{list.message}</h4>
-        <span>{list.time}</span>
+        <span>{list.change_time}</span>
       </div>
       <span onClick={(e) => deleteAlarmHandler(e, list, idx)}>
         <MdDeleteOutline style={{ fontSize: 25 }} />

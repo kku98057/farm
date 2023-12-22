@@ -196,8 +196,8 @@
   text-align: center;
 }
 .pointColor {
-  background-color: rgb(var(--color-primary));
+  background-color: #243665;
 }
 .ticketColor {
-  background-color: #243665;
+  background-color: rgb(var(--color-primary));
 }

@@ -17,8 +17,10 @@ import CreateTextAnimation from "../../Fn/CreateTextAnimation";
 import useGetAxios from "../../hooks/useGetAxios";
 import Popup from "../Popup";
 import useUpdate from "../../hooks/useUpdate";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function ShopFeedInventory() {
+  const queryClient = useQueryClient();
   const [popup, setPopup] = useState({ popup: false, type: "" });
   const setPopup2 = useSetRecoilState(AtomLevelPopup);
   const [globalLoading, setGlobalLoading] = useRecoilState(AtomLoading);
@@ -41,8 +43,11 @@ export default function ShopFeedInventory() {
     url: `/api/market/purchase`,
   });
   const pickHandler = (list: MarketItemType, type: string) => {
-    setPopup({ type: type, popup: true });
+    if (type === "ticket") {
+    } else {
+    }
     setPickItem(list);
+    setPopup({ type: type, popup: true });
   };
   const buyHandler = () => {
     if (currency < amountPrice()) {
@@ -58,20 +63,19 @@ export default function ShopFeedInventory() {
         {
           onError: (error) => {
             setGlobalLoading(false);
-            console.error();
+            console.error(error);
             alert(error);
           },
           onSuccess: () => {
             setGlobalLoading(false);
-            setMyFeed((prev) =>
-              prev.map((item) => ({
-                ...item,
-                quantity:
-                  item.name === pickItem.name ? quantity : item.quantity,
-              }))
-            );
+
             setCurrency(currency - amountPrice());
             setPopup2({ text: "구매하였습니다.", popup: true });
+          },
+          onSettled: () => {
+            queryClient.invalidateQueries({
+              queryKey: ["/api/inventory/feed"],
+            });
           },
         }
       );
@@ -134,11 +138,13 @@ export default function ShopFeedInventory() {
               clickHandler={() => pickHandler(list, "point")}
               className={`${buttonStyle.buyBtn} ${buttonStyle.wideBtn}  ${buttonStyle.pointColor} `}
             />
-            <ClickButton
-              text="먹이권으로 구매"
-              clickHandler={() => pickHandler(list, "ticket")}
-              className={`${buttonStyle.buyBtn} ${buttonStyle.wideBtn}  ${buttonStyle.ticketColor}`}
-            />
+            {list.name === "일반먹이" && (
+              <ClickButton
+                text="먹이권으로 구매"
+                clickHandler={() => pickHandler(list, "ticket")}
+                className={`${buttonStyle.buyBtn} ${buttonStyle.wideBtn}  ${buttonStyle.ticketColor}`}
+              />
+            )}
           </div>
         </li>
       );

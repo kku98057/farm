@@ -104,7 +104,6 @@ export interface ShopItemList {
   exp: number;
   name: string;
 }
-
 export interface FoodItemsType {
   amount: number | null;
   exp: number | null;
@@ -121,7 +120,6 @@ export interface ShopTabs {
     };
   };
 }
-
 export interface LevelStatusType {
   expTimer:
     | "stop" //일반상태
@@ -133,20 +131,17 @@ export interface LevelStatusType {
     | "last_evolution" //최종진화가능 상태
     | "last_evolution_complete"; //최종진화완료가능 상태
 }
-
 export interface FoodType {
   name: string;
   img: string;
   quantity: number;
   addExp: number;
 }
-
 export type AnimalStatus = {
   wakeup: Object;
   sleep: Object;
   sleepy: Object;
 };
-
 export type emotionListType = {
   id: number;
   name: string;
@@ -154,7 +149,7 @@ export type emotionListType = {
 export interface AlarmType {
   id: number;
   message: string;
-  time: string;
+  change_time: string;
   is_read: boolean;
 }
 export interface EmotionType {

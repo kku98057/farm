@@ -12,8 +12,10 @@ import { feedType } from "../types";
 import { useEffect, useState } from "react";
 
 import useUpdate from "./useUpdate";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function useEat() {
+  const queryClient = useQueryClient();
   const [myFeed, setMyFeed] = useRecoilState(AtomFeed);
   const [myCharacter, setMyCharacter] = useRecoilState(AtomMyCharacter);
   const [popup, setPopup] = useRecoilState(AtomLevelPopup);
@@ -65,18 +67,23 @@ export default function useEat() {
             setFeedPopup(false);
             return;
           }
-          setMyFeed((prev) =>
-            prev.map((item) => ({
-              ...item,
-              quantity: name === item.name ? item.quantity - 1 : item.quantity,
-            }))
-          );
+          // setMyFeed((prev) =>
+          //   prev.map((item) => ({
+          //     ...item,
+          //     quantity: name === item.name ? item.quantity - 1 : item.quantity,
+          //   }))
+          // );
           setMyCharacter((prev) => ({
             ...prev,
             acquired_exp: prev.acquired_exp + exp + 1000,
           }));
 
           // setPopup((prev) => ({ ...prev, popup: true }));
+        },
+        onSettled: () => {
+          queryClient.invalidateQueries({
+            queryKey: ["/api/inventory/feed", "/api/main"],
+          });
         },
       }
     );

@@ -12,6 +12,7 @@ export default function FeedPopup() {
   const setFeedPopup = useSetRecoilState(AtomFeedPopup);
   const [delay, setDelay] = useState(false);
   const [globalLoading, setGlobalLoading] = useRecoilState(AtomLoading);
+  console.log(myFeed);
 
   const { eatHandler, popup, popupData, setPopup } = useEat();
 
@@ -33,25 +34,28 @@ export default function FeedPopup() {
 
   const myFeedList = () => {
     if (myFeed.length !== 0) {
-      return myFeed.map((list) => (
-        <div className="btns2" key={`${list.name}_feedPopup`}>
-          <div
-            className={tabStyle.feed_select}
-            onClick={() =>
-              giveToFeed(list.grade, list.quantity, list.name, list.exp)
-            }
-          >
-            <img src={feed} alt={list.name} />
-            <div className={tabStyle.feed_select_data}>
-              <span>수량:{list.quantity}</span>
-              <span>
-                {list.name}
-                <strong>(+{list.exp}exp)</strong>
-              </span>
+      return myFeed.map((list) => {
+        if (list.name === "교환권") return;
+        return (
+          <div className="btns2" key={`${list.name}_feedPopup`}>
+            <div
+              className={tabStyle.feed_select}
+              onClick={() =>
+                giveToFeed(list.id, list.quantity, list.name, list.exp)
+              }
+            >
+              <img src={feed} alt={list.name} />
+              <div className={tabStyle.feed_select_data}>
+                <span>수량:{list.quantity}</span>
+                <span>
+                  {list.name}
+                  <strong>(+{list.exp}exp)</strong>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      ));
+        );
+      });
     } else {
       return (
         <>
