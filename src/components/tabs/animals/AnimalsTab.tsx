@@ -59,7 +59,7 @@ export default function AnimalsTab({ tabDatas }: { tabDatas: tabDatasType }) {
       username: username,
     });
   };
-
+  console.log(animalsList);
   return (
     <form
       className={tabStyle.tab_wrap}
@@ -83,7 +83,7 @@ export default function AnimalsTab({ tabDatas }: { tabDatas: tabDatasType }) {
               ))}
             </div>
           </div>
-          <div className={`btns2`}>
+          <div className={`btns3`}>
             <SubmitButton text="선택하기" />
           </div>
         </>

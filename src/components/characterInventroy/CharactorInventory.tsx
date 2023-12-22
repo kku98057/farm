@@ -187,7 +187,7 @@ const List = ({
     return equip.map(
       (item) =>
         item.emotion_id === list.emotion_id && (
-          <div className={tabStyle.equip_active}>장착중</div>
+          <div className={tabStyle.equip_active}></div>
         )
     );
   };

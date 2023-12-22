@@ -47,7 +47,8 @@ export default function AnimalsList({
       </div>
       <div className={tabStyle.animals_tab_data}>
         <div className={tabStyle.animals_tab_top}>
-          <AnimalsName name={list.name} />
+          <AnimalsName name={list.name} level={list.level} />
+
           <ClickButton
             className={buttonStyle.detailBtn}
             text="행동 목록"

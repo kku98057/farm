@@ -12,7 +12,7 @@ const query = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      gcTime: Infinity,
+      gcTime: 0,
       retry: 0,
       retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
     },

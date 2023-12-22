@@ -19,9 +19,6 @@ export interface MyAnimalType {
   percent_exp: number;
   status: string;
   total_exp: number;
-  image?: {
-    [key: string]: string;
-  };
 }
 export interface userType {
   acquired_exp: number;
@@ -155,9 +152,10 @@ export type emotionListType = {
   name: string;
 };
 export interface AlarmType {
-  title: string;
-  created_at: string;
-  read: boolean;
+  id: number;
+  message: string;
+  time: string;
+  is_read: boolean;
 }
 export interface EmotionType {
   emotion_id: number;

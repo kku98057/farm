@@ -20,6 +20,7 @@ import MyCharacter from "../../MyCharacter";
 import { nextLevel } from "../../../Fn/nextLevel";
 import UpdateNextLevelExp from "../../../Fn/UpdateNextLevelExp";
 import UpdateNextCurrency from "../../../Fn/UpdateNextCurrency";
+import useUpdate from "../../../hooks/useUpdate";
 
 export default function EvolutionBtns({
   albeEat,
@@ -32,6 +33,7 @@ export default function EvolutionBtns({
   text: string;
   type: string;
 }) {
+  const { mutate: evolutionMutate } = useUpdate({ url: "" });
   const [levelStatus, setLevelStatus] = useRecoilState(AtomLevelStatus);
   const [myCharacter, setMyCharacter] = useRecoilState(AtomMyCharacter);
   const [userData, setUserData] = useRecoilState(AtomUser);
@@ -155,22 +157,129 @@ export default function EvolutionBtns({
   }, [myCharacter.acquired_exp, myCharacter.level]);
   // 진화 완료 및 보상
   const completeEvolution = () => {
-    setLevelStatus({
-      expTimer: "stop",
-      levelStatus: "normal",
-    });
-    setMyCharacter((prev) => ({
-      ...prev,
-      level: prev.level + 1,
-      acquired_exp: 0,
-      next_exp: UpdateNextLevelExp(myCharacter.level + 1, prev.next_exp),
-    }));
-    setUserData((prev) => ({
-      ...prev,
-      currency: prev.currency + 500,
-    }));
-    addAlarmHandler({ meg: "축하드립니다.\n진화에 성공하셨습니다." });
-    setPopup({ popup: true, text: "축하드립니다. 진화에 성공하셨습니다." });
+    evolutionMutate(
+      {},
+      {
+        onError: (error) => {
+          console.error(error);
+          alert(error);
+        },
+        onSuccess: () => {
+          setLevelStatus({
+            expTimer: "stop",
+            levelStatus: "normal",
+          });
+          // addAlarmHandler({ meg: "축하드립니다.\n진화에 성공하셨습니다." });
+          setPopup({
+            popup: true,
+            text: "축하드립니다. 진화에 성공하셨습니다.",
+          });
+          switch (myCharacter.level) {
+            // 5레벨 진화
+            case 5:
+              setMyCharacter((prev) => ({
+                ...prev,
+                level: prev.level + 1,
+                acquired_exp: 0,
+                next_exp: UpdateNextLevelExp(
+                  myCharacter.level + 1,
+                  prev.next_exp
+                ),
+              }));
+              setUserData((prev) => ({
+                ...prev,
+                currency: prev.currency + 500,
+              }));
+              console.log(myCharacter.level);
+              return;
+            // 10레벨 진화
+            case 10:
+              setMyCharacter((prev) => ({
+                ...prev,
+                level: prev.level + 1,
+                acquired_exp: 0,
+                next_exp: UpdateNextLevelExp(
+                  myCharacter.level + 1,
+                  prev.next_exp
+                ),
+              }));
+              setUserData((prev) => ({
+                ...prev,
+                currency: prev.currency + 500,
+              }));
+              return;
+            // 15레벨 진화
+            case 15:
+              setMyCharacter((prev) => ({
+                ...prev,
+                level: prev.level + 1,
+                acquired_exp: 0,
+                next_exp: UpdateNextLevelExp(
+                  myCharacter.level + 1,
+                  prev.next_exp
+                ),
+              }));
+              setUserData((prev) => ({
+                ...prev,
+                currency: prev.currency + 500,
+              }));
+              return;
+            // 20레벨 진화
+            case 20:
+              setMyCharacter((prev) => ({
+                ...prev,
+                level: prev.level + 1,
+                acquired_exp: 0,
+                next_exp: UpdateNextLevelExp(
+                  myCharacter.level + 1,
+                  prev.next_exp
+                ),
+              }));
+              setUserData((prev) => ({
+                ...prev,
+                currency: prev.currency + 500,
+              }));
+              return;
+            // 25레벨 진화
+            case 25:
+              setMyCharacter((prev) => ({
+                ...prev,
+                level: prev.level + 1,
+                acquired_exp: 0,
+                next_exp: UpdateNextLevelExp(
+                  myCharacter.level + 1,
+                  prev.next_exp
+                ),
+              }));
+              setUserData((prev) => ({
+                ...prev,
+                currency: prev.currency + 500,
+              }));
+              return;
+            // 30레벨 진화
+            case 30:
+              setMyCharacter((prev) => ({
+                ...prev,
+                level: prev.level + 1,
+                acquired_exp: 0,
+                next_exp: UpdateNextLevelExp(
+                  myCharacter.level + 1,
+                  prev.next_exp
+                ),
+              }));
+              setUserData((prev) => ({
+                ...prev,
+                currency: prev.currency + 500,
+              }));
+              return;
+            default:
+              console.log("default");
+              return;
+          }
+        },
+      }
+    );
+
     // 진화 캐릭터 변경
   };
   // 최종진화 완료 및 보상
@@ -190,7 +299,7 @@ export default function EvolutionBtns({
       ...prev,
       currency: prev.currency + 500,
     }));
-    addAlarmHandler({ meg: "축하드립니다!\n최종진화에 성공하셨습니다." });
+    // addAlarmHandler({ meg: "축하드립니다!\n최종진화에 성공하셨습니다." });
     setPopup({ popup: true, text: "축하드립니다. 최종진화에 성공하셨습니다." });
     // 진화 캐릭터 변경
   };

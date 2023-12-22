@@ -16,9 +16,9 @@ export default function useAlarm() {
 
     setAlarmList((prev: any) => [
       {
-        title: meg,
-        created_at: date,
-        read: false,
+        message: meg,
+        time: date,
+        is_read: false,
       },
       ...prev,
     ]);

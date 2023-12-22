@@ -8,6 +8,12 @@ export default function FriendApprovalList({ list }: { list: FriendType }) {
     {
       img: stone,
       name: "item",
+      title: "먹이권",
+    },
+    {
+      img: stone,
+      name: "item",
+      title: "놀러가기",
     },
   ];
 
@@ -24,18 +30,19 @@ export default function FriendApprovalList({ list }: { list: FriendType }) {
 
       <div className={tabStyle.friend_right}>
         <ul className="btns" style={{ margin: 0 }}>
-          {btn.map((list, idx) => (
+          {btn.map((btns, idx) => (
             <li
               className={`${tabStyle.friend_btn} ${
                 !sendItemState ? `${tabStyle.active}` : ""
               }`}
-              key={`${list.name}_${idx}`}
+              key={`${list.friend_name}_approval_btns`}
             >
               <img
-                src={list.name}
-                alt={list.name}
+                src={btns.name}
+                alt={btns.name}
                 onClick={() => setSendItemState(false)}
               />
+              <span>{btns.title}</span>
             </li>
           ))}
         </ul>

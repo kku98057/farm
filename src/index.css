@@ -1,9 +1,11 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 :root {
+  --color-primary: 184, 204, 225;
+  --color-border: 220, 220, 220;
   --color-score: 211, 47, 47;
   --color-accScore: 47, 99, 211;
   --color-1: 251, 180, 174;
-  --color-2: 179, 205, 227;
+  --color-2: 131, 205, 227;
   --color-3: 204, 235, 197;
   --color-4: 222, 203, 228;
   --color-5: 254, 217, 166;
@@ -31,13 +33,14 @@
   --color-27: 188, 128, 189;
   --color-28: 204, 235, 197;
   --color-29: 255, 237, 111;
-  --color-navy: #243665;
-  --color-mint: #8bd8bd;
 }
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 #root {
   width: 100%;
@@ -45,7 +48,9 @@
 img {
   width: 100%;
   display: block;
+  pointer-events: none;
 }
+
 a {
   color: #000;
   text-decoration: none;
@@ -79,7 +84,7 @@ section {
 }
 main,
 header {
-  background-color: var(--color-navy);
+  background-color: rgb(var(--color-9));
 }
 main {
   flex: 1;
@@ -123,6 +128,13 @@ button {
   justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
+}
+.btns3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
 }
 .absoluteBtn {
   position: absolute;

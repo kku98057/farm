@@ -1,7 +1,7 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { feed } from "../asset";
 import Popup from "./Popup";
-import { AtomFeed, AtomFeedPopup } from "../store";
+import { AtomFeed, AtomFeedPopup, AtomLoading } from "../store";
 import { buttonStyle, tabStyle } from "../style";
 import ClickButton from "./buttons/ClickButton";
 import { useState } from "react";
@@ -10,6 +10,8 @@ import useEat from "../hooks/useEat";
 export default function FeedPopup() {
   const [myFeed, setMyFeed] = useRecoilState(AtomFeed);
   const setFeedPopup = useSetRecoilState(AtomFeedPopup);
+  const [delay, setDelay] = useState(false);
+  const [globalLoading, setGlobalLoading] = useRecoilState(AtomLoading);
 
   const { eatHandler, popup, popupData, setPopup } = useEat();
 
@@ -19,6 +21,9 @@ export default function FeedPopup() {
     name: string,
     exp: number
   ) => {
+    if (globalLoading) {
+      return;
+    }
     if (quantity <= 0) {
       setPopup({ popup: true, text: "먹이가 부족합니다." });
       return;
@@ -27,12 +32,9 @@ export default function FeedPopup() {
   };
 
   const myFeedList = () => {
-    return myFeed.map((list) => {
-      if (list.name === "교환권") {
-        return;
-      }
-      return (
-        <div className="btns" key={`${list.name}_feedPopup`}>
+    if (myFeed.length !== 0) {
+      return myFeed.map((list) => (
+        <div className="btns2" key={`${list.name}_feedPopup`}>
           <div
             className={tabStyle.feed_select}
             onClick={() =>
@@ -49,13 +51,48 @@ export default function FeedPopup() {
             </div>
           </div>
         </div>
+      ));
+    } else {
+      return (
+        <>
+          <div className="btns2">
+            <div
+              className={tabStyle.feed_select}
+              onClick={() => giveToFeed(0, 0, "일반 먹이", 10)}
+            >
+              <img src={feed} alt="일반 먹이" />
+              <div className={tabStyle.feed_select_data}>
+                <span>수량:0</span>
+                <span>
+                  일반 먹이
+                  <strong>(+10exp)</strong>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="btns2">
+            <div
+              className={tabStyle.feed_select}
+              onClick={() => giveToFeed(1, 0, "고급 먹이", 30)}
+            >
+              <img src={feed} alt="고급 먹이" />
+              <div className={tabStyle.feed_select_data}>
+                <span>수량:0</span>
+                <span>
+                  고급 먹이
+                  <strong>(+30exp)</strong>
+                </span>
+              </div>
+            </div>
+          </div>
+        </>
       );
-    });
+    }
   };
   return (
     <Popup sentence={"먹이를 선택해주세요."}>
       <div className="btns">{myFeedList()}</div>
-      <div className="btns">
+      <div className="btns2">
         <ClickButton
           text="닫기"
           className={buttonStyle.buyBtn}

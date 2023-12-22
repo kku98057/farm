@@ -6,7 +6,7 @@
   padding-top: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: rgb(var(--color-9));
   display: flex;
   flex-direction: column;
   z-index: 2;
@@ -38,7 +38,6 @@
 .tab_inner {
   width: 100%;
   flex: 1;
-
   overflow: auto;
   position: relative;
   display: flex;
@@ -55,10 +54,9 @@
   position: relative;
 }
 .tab_box {
-  background-color: #f1f1f1;
+  background-color: #fff;
   height: 180px;
-  /* border: 2px solid rgb(255, 255, 191); */
-  border: 3px solid transparent;
+
   border-radius: 5px;
   overflow: hidden;
 }
@@ -73,9 +71,9 @@
 .item_list {
   cursor: pointer;
   position: relative;
-
   display: flex;
   gap: 10px;
+
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -98,37 +96,47 @@
   padding: 20px;
 
   border-radius: 10px;
-  border: 2px solid rgb(var(--color-9));
+  border: 1px solid rgb(var(--color-border));
 }
 .feed_list {
   cursor: pointer;
-  gap: 50px;
+
   display: flex;
-
-  padding: 20px;
-
+  flex-direction: column;
   border-radius: 10px;
-  border: 2px solid rgb(var(--color-9));
-
+  border: 1px solid rgb(var(--color-border));
   align-items: center;
-
+}
+.feed_data {
+  display: flex;
+  width: 100%;
   gap: 30px;
+  padding: 20px 10px;
 }
 .feed_tab_img {
   width: 50px;
 }
+.feed_tab_btns {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-top: 10px;
+  border-radius: 0px 0 10px 10px;
+  overflow: hidden;
+}
 .animals_tab {
   margin-top: 30px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
   justify-content: space-between;
 }
+
 .animals_tab li {
   flex: 1;
   /* border-radius: 5px; */
   padding: 10px 0;
-  border: 2px solid rgb(var(--color-9));
+  border: 1px solid rgb(var(--color-border));
   text-align: center;
 }
 .animals_tab li:first-child {
@@ -139,12 +147,16 @@
   border-left: 0;
   border-radius: 0 5px 5px 0;
 }
+.animals_tab_names span {
+  font-size: 12px;
+  font-weight: normal;
+}
 .animals_tab li span {
   font-weight: 600;
 }
 .animals_tab li.active {
-  background-color: var(--color-mint);
-  border: 2px solid var(--color-mint);
+  background-color: rgb(var(--color-primary));
+  border: 2px solid rgb(var(--color-primary));
   /* border: 2px solid rgb(var(--color-9)); */
 }
 
@@ -183,12 +195,13 @@
   width: 100%;
 }
 .animals_tab_msg {
-  padding: 10px 0;
+  margin-bottom: 5px;
+  text-align: right;
   font-weight: bold;
   font-size: 14px;
 }
 .clickAnimal {
-  background-color: rgb(var(--color-9));
+  background-color: #fff;
 }
 
 .animals_tab_img {
@@ -204,7 +217,7 @@
   width: 100%;
   height: 10px;
   border-radius: 3px;
-  background-color: rgb(var(--color-9));
+  background-color: #fff;
   box-shadow: inset 0 0 3px 1px rgba(0, 0, 0, 0.1);
 }
 .animals_tab_bar div {
@@ -275,7 +288,7 @@
   flex: 1;
   text-align: center;
   padding: 10px 0;
-  border: 2px solid rgb(60, 72, 112);
+  border: 1px solid rgb(var(--color-border));
   font-weight: bold;
 }
 .tabHeader li.active {
@@ -453,21 +466,18 @@
   display: flex;
 }
 .equip_active {
-  background-color: rgba(var(--color-21), 0.2);
+  border-radius: 5px;
+  border: 3px solid rgb(var(--color-primary));
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
 }
 .emotionSelector {
   all: unset;
   width: 120px;
-  border: 1px solid #757575;
+  border: 1px solid rgb(var(--color-border));
   cursor: pointer;
 
   display: flex;
@@ -507,8 +517,6 @@
   padding: 20px 0;
 }
 .friend_list {
-  /* border-radius: 5px;
-  border: 1px solid rgb(var(--color-9)); */
   width: 80%;
   display: flex;
   align-items: center;
@@ -516,7 +524,7 @@
   padding-bottom: 5px;
 }
 .friend_list:not(:last-of-type) {
-  border-bottom: 1px solid rgb(var(--color-9));
+  border-bottom: 1px solid rgb(var(--color-border));
 }
 
 .friend_left {
@@ -564,6 +572,66 @@
   max-width: 200px;
   width: 100%;
 }
+.friend_invite {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  justify-content: space-between;
+}
+.friend_invite_code {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+.friend_input_wrap {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+  margin: 20px 0 10px 0;
+}
+.friend_invite_code h4 {
+  font-size: 20px;
+}
+.friend_invite_code p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+.friend_invite_code input {
+  font-size: 20px;
+  background-color: #fff;
+  padding: 13px 10px;
+  flex: 1;
+  font-size: 12px;
+
+  border-radius: 5px;
+}
+.friend_mycode {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+}
+.friend_mycode span {
+  font-size: 14px;
+  color: rgb(var(--color-2));
+  font-weight: 500;
+}
+.friend_copy {
+  width: 95%;
+  background-color: rgb(var(--color-primary));
+  padding: 12px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
 /* 알람 */
 .alarm_tab_inner {
   display: flex;

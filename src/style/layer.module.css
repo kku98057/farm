@@ -125,14 +125,14 @@
   z-index: 34;
 }
 .nickanme_input {
-  border: 1px solid #2b2b2b;
+  border: 1px solid rgb(var(--color-border));
   border-radius: 10px;
   padding: 10px;
   font-size: 16px;
 }
 .nickname_wrap {
   background-color: #fff;
-  border: 2px solid #2b2b2b;
+  border: 1px solid rgb(var(--color-border));
   padding: 20px;
   border-radius: 20px;
 }

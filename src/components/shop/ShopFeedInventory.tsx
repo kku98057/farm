@@ -7,16 +7,21 @@ import { ClickType, MarketItemType, MarketType } from "../../types";
 import useEat from "../../hooks/useEat";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { FiMinus, FiPlus } from "react-icons/fi";
-import { AtomCurrency, AtomFeed, AtomLevelPopup } from "../../store";
+import {
+  AtomCurrency,
+  AtomFeed,
+  AtomLevelPopup,
+  AtomLoading,
+} from "../../store";
 import CreateTextAnimation from "../../Fn/CreateTextAnimation";
 import useGetAxios from "../../hooks/useGetAxios";
 import Popup from "../Popup";
 import useUpdate from "../../hooks/useUpdate";
 
 export default function ShopFeedInventory() {
-  const [popup, setPopup] = useState(false);
+  const [popup, setPopup] = useState({ popup: false, type: "" });
   const setPopup2 = useSetRecoilState(AtomLevelPopup);
-
+  const [globalLoading, setGlobalLoading] = useRecoilState(AtomLoading);
   const [myFeed, setMyFeed] = useRecoilState(AtomFeed);
 
   const [pickItem, setPickItem] = useState<MarketItemType>({
@@ -35,31 +40,46 @@ export default function ShopFeedInventory() {
   const { mutate, isSuccess } = useUpdate({
     url: `/api/market/purchase`,
   });
-  const pickHandler = (list: MarketItemType) => {
-    setPopup(true);
+  const pickHandler = (list: MarketItemType, type: string) => {
+    setPopup({ type: type, popup: true });
     setPickItem(list);
   };
   const buyHandler = () => {
     if (currency < amountPrice()) {
       alert("포인트가 부족합니다..");
     } else {
-      mutate({
-        item_id: pickItem.id,
-        amount: quantity,
-      });
-      setMyFeed((prev) =>
-        prev.map((item) => ({
-          ...item,
-          quantity: item.name === pickItem.name ? quantity : item.quantity,
-        }))
+      setGlobalLoading(true);
+      mutate(
+        {
+          item_id: pickItem.id,
+          amount: quantity,
+        },
+
+        {
+          onError: (error) => {
+            setGlobalLoading(false);
+            console.error();
+            alert(error);
+          },
+          onSuccess: () => {
+            setGlobalLoading(false);
+            setMyFeed((prev) =>
+              prev.map((item) => ({
+                ...item,
+                quantity:
+                  item.name === pickItem.name ? quantity : item.quantity,
+              }))
+            );
+            setCurrency(currency - amountPrice());
+            setPopup2({ text: "구매하였습니다.", popup: true });
+          },
+        }
       );
-      setCurrency(currency - amountPrice());
-      setPopup2({ text: "구매하였습니다.", popup: true });
     }
   };
 
   const cancleHandler = () => {
-    setPopup(false);
+    setPopup({ popup: false, type: "" });
     setPickItem({
       name: "",
       id: null,
@@ -96,21 +116,30 @@ export default function ShopFeedInventory() {
             alignItems: "center",
           }}
         >
-          <div className={tabStyle.feed_tab_img}>
-            <img src={feed} alt={list.name} />
+          <div className={tabStyle.feed_data}>
+            <div className={tabStyle.feed_tab_img}>
+              <img src={feed} alt={list.name} />
+            </div>
+            <div className={tabStyle.feed_tab_data}>
+              <h3>
+                {list.name}
+                <span>({list.exp}exp)</span>
+              </h3>
+              <span>가격 : {list.price.toLocaleString()}P</span>
+            </div>
           </div>
-          <div className={tabStyle.feed_tab_data}>
-            <h3>
-              {list.name}
-              <span>({list.exp}exp)</span>
-            </h3>
-            <span>가격 : {list.price.toLocaleString()}P</span>
+          <div className={tabStyle.feed_tab_btns}>
+            <ClickButton
+              text="포인트로 구매"
+              clickHandler={() => pickHandler(list, "point")}
+              className={`${buttonStyle.buyBtn} ${buttonStyle.wideBtn}  ${buttonStyle.pointColor} `}
+            />
+            <ClickButton
+              text="먹이권으로 구매"
+              clickHandler={() => pickHandler(list, "ticket")}
+              className={`${buttonStyle.buyBtn} ${buttonStyle.wideBtn}  ${buttonStyle.ticketColor}`}
+            />
           </div>
-          <ClickButton
-            text="구매"
-            clickHandler={() => pickHandler(list)}
-            className={buttonStyle.buyBtn}
-          />
         </li>
       );
     });
@@ -121,7 +150,7 @@ export default function ShopFeedInventory() {
       {!isLoading ? (
         <>
           {FeedList()}
-          {popup && (
+          {popup.popup && (
             <Popup text={`${pickItem.name}`} sentence="을/를 구매하시겠습니까?">
               <div className={layerStyle.quantity}>
                 <FiMinus onClick={minusClick} />
@@ -133,9 +162,16 @@ export default function ShopFeedInventory() {
                 />
                 <FiPlus onClick={plusClick} />
               </div>
-              <div className={layerStyle.popup_price}>
-                가격 : {amountPrice().toLocaleString()}P
-              </div>
+              {popup.type === "point" ? (
+                <div className={layerStyle.popup_price}>
+                  가격 : {amountPrice().toLocaleString()}P
+                </div>
+              ) : (
+                <div className={layerStyle.popup_price}>
+                  가격 : {amountPrice().toLocaleString()}개
+                </div>
+              )}
+
               <div className="btns">
                 <ClickButton
                   text="취소하기"

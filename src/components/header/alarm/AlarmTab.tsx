@@ -28,7 +28,9 @@ export default function AlarmTab({
   }, []);
   useEffect(() => {
     setAlarmLength(alarmList.length);
-    setAlarmReadLength(alarmList.filter((item) => item.read === false).length);
+    setAlarmReadLength(
+      alarmList.filter((item) => item.is_read === false).length
+    );
   }, [alarmList]);
 
   const deleteAlarmHandler = (e: any, list: AlarmType, idx: number) => {
@@ -36,11 +38,11 @@ export default function AlarmTab({
   };
   const readAlarmHandler = (e: ClickType, list: AlarmType, idx: number) => {
     e.stopPropagation();
-    if (!list.read)
+    if (!list.is_read)
       setAlarmList((prev) =>
         prev.map((item) => ({
           ...item,
-          read: list === item ? true : item.read,
+          is_read: list === item ? true : item.is_read,
         }))
       );
     return;
@@ -50,7 +52,7 @@ export default function AlarmTab({
   };
   const allReadHandler = () => {
     setAlarmList((prev: any) =>
-      prev.map((item: any) => ({ ...item, read: true }))
+      prev.map((item: any) => ({ ...item, is_read: true }))
     );
   };
   return (
@@ -64,7 +66,7 @@ export default function AlarmTab({
               <AlarmList
                 list={list}
                 idx={idx}
-                key={`${list.title}_${list.created_at}_${idx}`}
+                key={`${list.message}_${list.time}_${idx}`}
                 deleteAlarmHandler={deleteAlarmHandler}
                 readAlarmHandler={readAlarmHandler}
               />
@@ -114,12 +116,12 @@ const AlarmList = ({
     <li
       onClick={(e) => readAlarmHandler(e, list, idx)}
       className={`${tabStyle.alarm_list} ${
-        list.read === false ? `${tabStyle.active}` : ""
+        list.is_read === false ? `${tabStyle.active}` : ""
       }`}
     >
       <div className={tabStyle.alarm_list_des}>
-        <h4>{list.title}</h4>
-        <span>{list.created_at}</span>
+        <h4>{list.message}</h4>
+        <span>{list.time}</span>
       </div>
       <span onClick={(e) => deleteAlarmHandler(e, list, idx)}>
         <MdDeleteOutline style={{ fontSize: 25 }} />

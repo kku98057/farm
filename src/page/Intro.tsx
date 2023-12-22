@@ -56,7 +56,7 @@ const StartPage = ({
 }) => {
   const login = (e: SubmitType) => {
     e.preventDefault();
-    setIsLoading(true);
+
     const TOKEN = Cookies.get("sleep_token");
     if (TOKEN && TOKEN !== "undefined") {
       setProcess("nickname");

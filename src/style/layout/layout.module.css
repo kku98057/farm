@@ -34,7 +34,7 @@
   width: 20px;
 }
 .myCurrency span {
-  color: #fff;
+  color: #000;
 }
 .user_info {
   display: flex;
@@ -170,7 +170,7 @@
 /* point */
 .point_wrap {
   padding: 10px;
-  border: 1px solid rgb(60, 72, 112);
+  border: 1px solid rgb(var(--color-border));
   background-color: rgb(60, 72, 112, 0.1);
   border-radius: 10px;
   margin-bottom: 20px;

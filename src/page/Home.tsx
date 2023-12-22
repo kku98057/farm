@@ -13,6 +13,7 @@ import {
   AtomPendingFriendList,
   AtomRejectFriendList,
   AtomApprovalFriendList,
+  AtomLoading,
 } from "../store";
 import ShopTab from "../components/tabs/ShopTab";
 
@@ -48,14 +49,18 @@ import FeedPopup from "../components/FeedPopup";
 import Loading from "../components/Loading";
 import CreateNickname from "../components/CreateNickname";
 import { nextLevel } from "../Fn/nextLevel";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 export default function Home() {
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams(location.search);
+
   const setMyCharacter = useSetRecoilState(AtomMyCharacter);
 
   const [popup, setPopup] = useRecoilState(AtomLevelPopup);
   const feedPopup = useRecoilValue(AtomFeedPopup);
   const [userData, setUserData] = useRecoilState(AtomUser);
-  const headerTab = useRecoilValue(AtomHeaderTab);
+  const [headerTab, setHeaderTab] = useRecoilState(AtomHeaderTab);
   const setLevelModel = useSetRecoilState(AtomAccountLevelModel);
   const setAnimalsList = useSetRecoilState(AtomAnimalsList);
   const currentAniamlTabId = useRecoilValue(AtomAnimalTabCurrentTabAnimal);
@@ -64,6 +69,7 @@ export default function Home() {
   const setPendingFriendList = useSetRecoilState(AtomPendingFriendList);
   const setRejectFriendList = useSetRecoilState(AtomRejectFriendList);
   const setApprovalFriendList = useSetRecoilState(AtomApprovalFriendList);
+  const [globalLoading, setGlobalLoading] = useRecoilState(AtomLoading);
 
   const HeaderTab = () => {
     switch (headerTab) {
@@ -105,24 +111,22 @@ export default function Home() {
   const { data: animalsData, isLoading: isLoadingAnimalsData } = useGetAxios({
     url: `/api/animal/list`,
   });
-  const { data: expTable, isLoading: isLoadingExpTable } = useGetAxios({
-    url: "/api/main/exp",
-  });
-  const { data: friendPendingData, isLoading: isLoadingFriendPendingData } =
-    useGetAxios({
-      url: "/api/friend/list",
-      params: { status: "pending" },
-    });
-  const { data: friendRejectData, isLoading: isLoadingFriendRejectData } =
-    useGetAxios({
-      url: "/api/friend/list",
-      params: { status: "reject" },
-    });
-  const { data: friendApprovalData, isLoading: isLoadingFriendApprovalData } =
-    useGetAxios({
-      url: "/api/friend/list",
-      params: { status: "approval" },
-    });
+
+  // const { data: friendPendingData, isLoading: isLoadingFriendPendingData } =
+  //   useGetAxios({
+  //     url: "/api/friend/list",
+  //     params: { status: "pending" },
+  //   });
+  // const { data: friendRejectData, isLoading: isLoadingFriendRejectData } =
+  //   useGetAxios({
+  //     url: "/api/friend/list",
+  //     params: { status: "reject" },
+  //   });
+  // const { data: friendApprovalData, isLoading: isLoadingFriendApprovalData } =
+  //   useGetAxios({
+  //     url: "/api/friend/list",
+  //     params: { status: "approval" },
+  //   });
 
   // 메인데이터
   useEffect(() => {
@@ -145,11 +149,7 @@ export default function Home() {
     }
   }, [isLoading, data]);
   // 경험치테이블 데이터
-  useEffect(() => {
-    if (expTable && !isLoadingExpTable) {
-      setLevelModel(expTable.user_level_list);
-    }
-  }, [isLoadingExpTable, expTable]);
+
   //동물리스트
   useEffect(() => {
     if (animalsData && !isLoadingAnimalsData) {
@@ -162,36 +162,35 @@ export default function Home() {
       setMyFeed(feedInventory.inventories.items);
     }
   }, [feedInventory, isLoadingFeedInventory]);
+  // useEffect(() => {
+  //   if (friendPendingData && !isLoadingFriendPendingData) {
+  //     setPendingFriendList(friendPendingData.list);
+  //   }
+  //   if (friendRejectData && !isLoadingFriendRejectData) {
+  //     setRejectFriendList(friendRejectData.list);
+  //   }
+  //   if (friendApprovalData && !isLoadingFriendApprovalData) {
+  //     setApprovalFriendList(friendApprovalData.list);
+  //   }
+  // }, [
+  //   friendPendingData,
+  //   isLoadingFriendPendingData,
+  //   friendRejectData,
+  //   isLoadingFriendRejectData,
+  //   friendApprovalData,
+  //   isLoadingFriendApprovalData,
+  // ]);
+
   useEffect(() => {
-    if (friendPendingData && !isLoadingFriendPendingData) {
-      setPendingFriendList(friendPendingData.list);
+    if (searchParams) {
+      const tab: any = searchParams.get("tab");
+      setHeaderTab(tab);
     }
-    if (friendRejectData && !isLoadingFriendRejectData) {
-      setRejectFriendList(friendRejectData.list);
-    }
-    if (friendApprovalData && !isLoadingFriendApprovalData) {
-      setApprovalFriendList(friendApprovalData.list);
-    }
-  }, [
-    friendPendingData,
-    isLoadingFriendPendingData,
-    friendRejectData,
-    isLoadingFriendRejectData,
-    friendApprovalData,
-    isLoadingFriendApprovalData,
-  ]);
-  console.log(friendPendingData, "대기");
-  console.log(friendRejectData, "거절");
-  console.log(friendApprovalData, "승인");
+  }, []);
+
   return (
     <>
-      {!isLoading &&
-      !isLoadingExpTable &&
-      !isLoadingFeedInventory &&
-      !isLoadingAnimalsData &&
-      !isLoadingFriendPendingData &&
-      !isLoadingFriendRejectData &&
-      !isLoadingFriendApprovalData ? (
+      {!isLoading && !isLoadingFeedInventory && !isLoadingAnimalsData ? (
         <>
           {userData.nickname === "" ? (
             <CreateNickname />
@@ -225,6 +224,7 @@ export default function Home() {
                   </div>
                 </Popup>
               )}
+              {globalLoading && <Loading />}
             </>
           )}
         </>

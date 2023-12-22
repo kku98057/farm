@@ -75,7 +75,7 @@ export default function WellTab({ tabDatas }: { tabDatas: tabDatasType }) {
             setPopup({ popup: true, text: MEG.LOGGING_MEG });
             setLoading(false);
             setStart(true);
-            addAlarmHandler({ meg: `${name}${MEG.LOGGING_MEG}` });
+            // addAlarmHandler({ meg: `${name}${MEG.LOGGING_MEG}` });
             setRemainTime(1000 * 30);
           },
           onError: (error: any) => {

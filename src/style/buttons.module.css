@@ -1,13 +1,13 @@
 .submitBtn {
   box-sizing: border-box;
   padding: 10px 20px;
-  background-color: var(--color-mint);
+  background-color: rgb(var(--color-primary));
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90%;
+  width: 100%;
 
-  max-width: 420px;
+  /* max-width: 420px; */
   color: #fff;
   font-weight: bold;
   font-size: 16px;
@@ -16,7 +16,7 @@
 .linkBtn {
   box-sizing: border-box;
   padding: 10px 20px;
-  background-color: var(--color-mint);
+  background-color: rgb(var(--color-primary));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +38,7 @@
 }
 .buyBtn {
   padding: 10px 20px;
-  background-color: var(--color-mint);
+  background-color: rgb(var(--color-primary));
   color: #fff;
   font-size: 14px;
 }
@@ -63,14 +63,14 @@
   align-items: center;
   justify-content: center;
   color: #fff;
-  background-color: rgb(var(--color-2));
+  background-color: rgb(var(--color-primary));
   border-radius: 5px;
 }
 .equipCancelBtn {
   background-color: rgb(var(--color-1));
 }
 .addFriendBtn {
-  background-color: var(--color-mint);
+  background-color: rgb(var(--color-primary));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,7 +84,7 @@
   font-size: 20px;
 }
 .levelupBtn {
-  background-color: var(--color-mint);
+  background-color: rgb(var(--color-primary));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,7 +96,7 @@
   font-weight: bold;
 }
 .timerBtn {
-  background-color: var(--color-mint);
+  background-color: rgb(var(--color-primary));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,7 +136,7 @@
   font-size: 18px;
 }
 .feedBtn {
-  background-color: var(--color-mint);
+  background-color: rgb(var(--color-primary));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,7 +155,7 @@
 .detailBtn {
   font-size: 12px;
   padding: 3px 12px;
-  border: 1px solid #7a7a7a;
+  border: 1px solid rgb(var(--color-border));
   color: #333;
   border-radius: 50px;
 }
@@ -189,4 +189,15 @@
   font-weight: bold;
   white-space: pre;
   text-align: center;
+}
+.wideBtn {
+  max-width: 100%;
+  flex: 1;
+  text-align: center;
+}
+.pointColor {
+  background-color: rgb(var(--color-primary));
+}
+.ticketColor {
+  background-color: #243665;
 }

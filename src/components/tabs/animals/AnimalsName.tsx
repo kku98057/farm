@@ -1,6 +1,12 @@
 import { tabStyle } from "../../../style";
 
-export default function AnimalsName({ name }: { name: string }) {
+export default function AnimalsName({
+  name,
+  level,
+}: {
+  name: string;
+  level: number;
+}) {
   const engName = (name: string) => {
     switch (name) {
       case "고양이":
@@ -15,7 +21,9 @@ export default function AnimalsName({ name }: { name: string }) {
   };
   return (
     <div className={tabStyle.animals_tab_names}>
-      <h4>{name}</h4>
+      <h4>
+        {name} <span>(lv{level ? level : 1})</span>
+      </h4>
     </div>
   );
 }

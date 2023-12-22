@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import Cookies from "js-cookie";
-import axios, { AxiosError } from "axios";
+
+import axios from "axios";
 import { useSetRecoilState } from "recoil";
 import { AtomLoading } from "../store";
-import { useEffect } from "react";
+
 import { useLocation, useSearchParams } from "react-router-dom";
 export default function useGetAxios({
   url,
@@ -17,11 +17,9 @@ export default function useGetAxios({
   const [searchParams, setSearchParams] = useSearchParams(location.search);
   const TOKEN = searchParams.get("token");
 
-  const { data, isLoading, isSuccess, error } = useQuery({
+  const { data, isLoading, isSuccess, error, isFetching } = useQuery({
     queryKey: [url, params],
     queryFn: async () => {
-      setGlobalLoading(true); // 요청 시작 시 로딩 상태 활성화
-
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}${url}`,
@@ -43,9 +41,6 @@ export default function useGetAxios({
       }
     },
   });
-  useEffect(() => {
-    setGlobalLoading(true);
-  }, [isLoading]);
 
-  return { data, isLoading, isSuccess, error };
+  return { data, isLoading, isSuccess, error, isFetching };
 }

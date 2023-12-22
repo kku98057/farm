@@ -7,11 +7,12 @@ export default function FriendFilteTab({
   tab: string;
   setTab: (state: string) => void;
 }) {
-  const tabList = ["친구목록", "요청목록", "친구검색"];
+  const tabList = ["친구목록", "친구등록"];
   return (
     <ul className={tabStyle.animals_tab}>
       {tabList.map((data) => (
         <li
+          key={data}
           onClick={() => setTab(data)}
           className={tab === data ? `${tabStyle.active}` : ""}
         >

@@ -54,7 +54,7 @@ export default function StartingTab({
     url: "/api/animal",
     isAlert: "noAlert",
   });
-
+  useEffect(() => {}, []);
   const submitHandler = (e: SubmitType, name: string) => {
     e.preventDefault();
     const setItem = {
@@ -62,10 +62,6 @@ export default function StartingTab({
       name: name,
       animal_id: animalClicked.animal_id,
       maxExp: levelState[myCharacter.level as keyof typeof levelState].exp,
-      image: {
-        ...myCharacter.image,
-        wakeup: animalClicked.image,
-      },
     };
     localStorage.setItem("my_character", JSON.stringify(setItem));
     setMyCharacter((prev) => ({
@@ -73,10 +69,6 @@ export default function StartingTab({
       name: name,
       maxExp: levelState[myCharacter.level as keyof typeof levelState].exp,
       animal_id: animalClicked.animal_id,
-      image: {
-        ...prev.image,
-        wakeup: animalClicked.image || "",
-      },
     }));
 
     mutate(
@@ -151,6 +143,7 @@ export default function StartingTab({
                       <div style={{ width: 0 }}></div>
                     </div>
                     <div className={tabStyle.animals_tab_msg}>
+                      <span></span>
                       <span>0% complete</span>
                     </div>
                   </div>
