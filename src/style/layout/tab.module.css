@@ -265,13 +265,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-top: 30px; */
-  margin-top: -10px;
 }
 .animal_detail_img {
   width: 40%;
   position: relative;
-  /* margin-top: -10%; */
+
   pointer-events: none;
 }
 .animal_detail_data {
@@ -472,7 +470,23 @@
   width: 100%;
   height: 100%;
   top: 0;
+  z-index: 0;
   left: 0;
+}
+.lock_active {
+  border-radius: 5px;
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00000057;
+  font-size: 50px;
+  color: #fff;
 }
 .emotionSelector {
   all: unset;

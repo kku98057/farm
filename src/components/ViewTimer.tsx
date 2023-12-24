@@ -1,37 +1,36 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import FormatTimer from "../Fn/FormatTimer";
-import { AtomLevelStatus, AtomMyFeedTime } from "../store";
+import { AtomLevelStatus, AtomMyCharacter, AtomMyFeedTime } from "../store";
 import { buttonStyle } from "../style";
 import { useEffect } from "react";
 
 export default function ViewTimer() {
   const [eatTimer, setEatTimer] = useRecoilState(AtomMyFeedTime);
   const [levelStatus, setLevelStatus] = useRecoilState(AtomLevelStatus);
+  const [myCharacter, setMyCharacter] = useRecoilState(AtomMyCharacter);
 
   useEffect(() => {
-    if (levelStatus.expTimer === "starting") {
-      const timer = setInterval(() => {
-        setEatTimer((prev) => {
-          if (prev.use_feed > 0) {
-            return {
-              ...prev,
-              use_feed: prev.use_feed - 1000,
-            };
-          } else {
-            clearInterval(timer);
-            return {
-              ...prev,
-              use_feed: 0,
-            };
-          }
-        });
-      }, 1000);
-    }
-  }, [levelStatus.expTimer]);
+    const timer = setInterval(() => {
+      setMyCharacter((prev) => {
+        if (prev.remain_next_level_time > 0) {
+          return {
+            ...prev,
+            remain_next_level_time: prev.remain_next_level_time - 1000,
+          };
+        } else {
+          clearInterval(timer);
+          return {
+            ...prev,
+            remain_next_level_time: 0,
+          };
+        }
+      });
+    }, 1000);
+  }, [myCharacter.next_exp]);
 
   return (
     <div className={buttonStyle.evolutionBtn}>
-      {FormatTimer(eatTimer.use_feed)}
+      {FormatTimer(myCharacter.remain_next_level_time)}
     </div>
   );
 }

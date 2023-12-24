@@ -12,23 +12,19 @@ export interface FilterTabType {
 }
 export interface MyAnimalType {
   acquired_exp: number;
-  id: null | number;
+  evolution_status: EvolutionType;
+  id: number | null;
+  is_growth: boolean;
   level: number;
   name: string;
   next_exp: number;
   percent_exp: number;
+  remain_next_level_time: number;
   status: string;
-  total_exp: number;
 }
 export interface userType {
-  acquired_exp: number;
-  currency: number;
-  id: null | number;
-  level: number;
-  next_exp: number;
   nickname: string;
-  percent_exp: number;
-  total_exp: number;
+  sleep_score: number;
 }
 export interface feedType {
   id?: number | null;
@@ -38,15 +34,18 @@ export interface feedType {
 export interface FeedType {
   exp: number;
   grade: number;
-  id: number;
   name: string;
   quantity: number;
+  item_id: number;
 }
 
 export interface AnimalsType {
-  id: number;
+  id: number | null;
   name: string;
-  exp: number | null;
+  level: number;
+  percent_exp: number;
+  is_select: boolean;
+  is_pet: boolean;
 }
 export interface GrowingType {
   [key: string]: string;
@@ -131,6 +130,8 @@ export interface LevelStatusType {
     | "last_evolution" //최종진화가능 상태
     | "last_evolution_complete"; //최종진화완료가능 상태
 }
+export type EvolutionType = "first" | "second" | "third" | "final";
+
 export interface FoodType {
   name: string;
   img: string;
@@ -138,10 +139,17 @@ export interface FoodType {
   addExp: number;
 }
 export type AnimalStatus = {
-  wakeup: Object;
-  sleep: Object;
-  sleepy: Object;
+  [key: string]: AnimalEvolutionImgType;
+  wakeup: AnimalEvolutionImgType;
+  sleep: AnimalEvolutionImgType;
+  sleepy: AnimalEvolutionImgType;
 };
+export interface AnimalEvolutionImgType {
+  first: string;
+  second: string;
+  third: string;
+  final: any;
+}
 export type emotionListType = {
   id: number;
   name: string;
@@ -152,11 +160,15 @@ export interface AlarmType {
   change_time: string;
   is_read: boolean;
 }
-export interface EmotionType {
-  emotion_id: number;
+export interface ActionType {
+  action: string;
+  action_id: number;
   animal: string;
-  emotion: string;
+  category_id: number;
   is_equip: boolean;
+  is_lock: boolean;
+  name: string;
+  skin_code: number;
 }
 export interface EmotionAnimalType {
   name: string;
@@ -182,4 +194,12 @@ export interface FriendType {
   friend_id: number;
   friend_name: string;
   status: string;
+}
+export interface MainAlarmType {
+  count: number;
+  is_alarm: boolean;
+}
+export interface MainCurrency {
+  point: number;
+  crystal: number;
 }

@@ -59,11 +59,16 @@ export default function AlarmTab({
   // };
   useEffect(() => {
     if (data && !isLoading) {
+      data.list.map((item: AlarmType) => ({
+        ...item,
+        is_read: true,
+      }));
     }
     // setAlarmList((prev: any) =>
     //   prev.map((item: any) => ({ ...item, is_read: true }))
     // );
   }, [data, isLoading]);
+
   return (
     <div className={tabStyle.tab_wrap}>
       <BackButton back="" title="알람" />
@@ -135,9 +140,9 @@ const AlarmList = ({
         <h4>{list.message}</h4>
         <span>{list.change_time}</span>
       </div>
-      <span onClick={(e) => deleteAlarmHandler(e, list, idx)}>
+      {/* <span onClick={(e) => deleteAlarmHandler(e, list, idx)}>
         <MdDeleteOutline style={{ fontSize: 25 }} />
-      </span>
+      </span> */}
     </li>
   );
 };

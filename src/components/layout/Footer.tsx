@@ -6,22 +6,13 @@ import Container from "./Container";
 import {
   AtomAlarmLength,
   AtomAlarmReadLength,
-  AtomFooterTab,
   AtomHeaderTab,
   AtomLevelPopup,
-  AtomMyFarm,
   AtomUser,
 } from "../../store";
 import { useState, useEffect } from "react";
 
 export default function Footer() {
-  const setFooterTab = useSetRecoilState(AtomFooterTab);
-  const setHeaderTab = useSetRecoilState(AtomHeaderTab);
-
-  const handleActiveFilterTab = (title: string) => {
-    setFooterTab(title === "home" ? "" : title);
-    setHeaderTab("");
-  };
   return (
     <footer className={layoutStyle.footer}>
       <Container>
@@ -47,10 +38,6 @@ const FooterListUi = ({ list }: { list: ConstantType }) => {
     <li
       className={layoutStyle.list}
       onClick={() => {
-        if (userData.level < 2 && list.title === "feed_inventory") {
-          setPopup({ text: "레벨2부터 사용가능합니다.", popup: true });
-          return;
-        }
         setHeaderTab(list.title);
       }}
     >
@@ -63,16 +50,7 @@ const FooterListUi = ({ list }: { list: ConstantType }) => {
       )}
 
       <div>
-        <img
-          src={list.image}
-          alt={list.name}
-          style={{
-            filter:
-              userData.level < 2 && list.name === "먹이 보관함"
-                ? "grayscale(1)"
-                : "grayscale(0)",
-          }}
-        />
+        <img src={list.image} alt={list.name} />
       </div>
 
       {/* <span style={{ fontSize: 12, whiteSpace: "nowrap" }}>{list.name}</span> */}

@@ -50,7 +50,7 @@ export default function ShopFeedInventory() {
     setPopup({ type: type, popup: true });
   };
   const buyHandler = () => {
-    if (currency < amountPrice()) {
+    if (currency.point < amountPrice()) {
       alert("포인트가 부족합니다..");
     } else {
       setGlobalLoading(true);
@@ -69,12 +69,14 @@ export default function ShopFeedInventory() {
           onSuccess: () => {
             setGlobalLoading(false);
 
-            setCurrency(currency - amountPrice());
             setPopup2({ text: "구매하였습니다.", popup: true });
           },
           onSettled: () => {
             queryClient.invalidateQueries({
               queryKey: ["/api/inventory/feed"],
+            });
+            queryClient.invalidateQueries({
+              queryKey: ["/api/main"],
             });
           },
         }
@@ -138,13 +140,13 @@ export default function ShopFeedInventory() {
               clickHandler={() => pickHandler(list, "point")}
               className={`${buttonStyle.buyBtn} ${buttonStyle.wideBtn}  ${buttonStyle.pointColor} `}
             />
-            {list.name === "일반먹이" && (
+            {/* {list.name === "일반먹이" && (
               <ClickButton
                 text="먹이권으로 구매"
                 clickHandler={() => pickHandler(list, "ticket")}
                 className={`${buttonStyle.buyBtn} ${buttonStyle.wideBtn}  ${buttonStyle.ticketColor}`}
               />
-            )}
+            )} */}
           </div>
         </li>
       );

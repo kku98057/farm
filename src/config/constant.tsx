@@ -88,8 +88,8 @@ export const FooterList = [
     image: shop,
   },
   {
-    name: "동물 보관함",
-    title: "animals",
+    name: "보관함",
+    title: "inventory",
     image: inventory,
   },
   // {
@@ -173,55 +173,13 @@ export const HeaderTabDatas = {
   },
   shop: {
     name: "스르륵팜 스토어",
-    des: "다양한 행동표현을 획득해보세요.",
-    notice: [
-      "쿠폰은 발급 후 7일 이내 사용할 수 있습니다.",
-      "계절 상품은 조기 종료 될 수 있습니다.",
-    ],
   },
-  emotion_inventory: {
-    name: "스르륵팜 감정 보관함",
-    des: "더 많은 활동을 통해 해금해보세요!",
-    notice: [],
-  },
-  feed_inventory: {
-    name: "스르륵팜 먹이 보관함",
-    des: "다른 종류의 먹이를 먹여보세요.!",
-    notice: [],
-  },
-  animals: {
-    name: "스르륵팜 동물 보관함",
-    des: "다양한 동물캐릭터를 획득해보세요!",
-    notice: [
-      "쿠폰은 발급 후 7일 이내 사용할 수 있습니다.",
-      "계절 상품은 조기 종료 될 수 있습니다.",
-    ],
+
+  inventory: {
+    name: " 보관함",
   },
   animals_detail: {
     name: "동물 상세보기",
-    des: "다양한 동물캐릭터를 획득해보세요!",
-  },
-  feed: {
-    name: "미션",
-    notice: [
-      "쿠폰은 발급 후 7일 이내 사용할 수 있습니다.",
-      "계절 상품은 조기 종료 될 수 있습니다.",
-    ],
-  },
-  history: {
-    name: "히스토리",
-    notice: [
-      "쿠폰은 발급 후 7일 이내 사용할 수 있습니다.",
-      "계절 상품은 조기 종료 될 수 있습니다.",
-    ],
-  },
-  well: {
-    name: "스르륵팜 감정우물",
-    des: "감정우물로 현재의 감정을 기록하세요.",
-    notice: [
-      "쿠폰은 발급 후 7일 이내 사용할 수 있습니다.",
-      "계절 상품은 조기 종료 될 수 있습니다.",
-    ],
   },
 };
 
@@ -242,89 +200,350 @@ export const AnimalList = {
   오리: tiger,
   토끼: tiger,
   해달: tiger,
+  참새: tiger,
 };
 
 export const AnimalListStatus: { [key: string]: AnimalStatus } = {
   // 기린,사자,판다,양
   기린: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   양: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   쿼카: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   판다: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   호랑이: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   사자: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   고양이: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   강아지: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   올빼미: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   앵무새: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   닭: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   돌고래: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   말: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   오리: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   토끼: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
   해달: {
-    wakeup: sheep,
-    sleep: sheep,
-    sleepy: sheep,
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+  },
+  참새: {
+    wakeup: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleep: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
+    sleepy: {
+      first: tiger,
+      second: cat,
+      third: dog,
+      final: sheep,
+    },
   },
 };
 

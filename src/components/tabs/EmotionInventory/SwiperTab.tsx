@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { tabStyle } from "../../../style";
 import "swiper/css";
 
-import { EmotionAnimalType, EmotionTabType, EmotionType } from "../../../types";
+import { EmotionAnimalType, EmotionTabType, ActionType } from "../../../types";
 import { AtomEmotionList } from "../../../store";
 import { useSetRecoilState } from "recoil";
 
@@ -12,7 +12,7 @@ export default function SwiperTab({
   animalCategory,
   emotionItem,
 }: {
-  emotionItem: EmotionType[];
+  emotionItem: ActionType[];
   animalCategory: EmotionAnimalType[];
   setTab: React.Dispatch<React.SetStateAction<EmotionTabType>>;
   tab: EmotionTabType;
@@ -24,7 +24,7 @@ export default function SwiperTab({
       if (type === "all") {
         return emotionItem;
       }
-      return emotionItem.filter((data: EmotionType) => data.animal === type);
+      return emotionItem.filter((data: ActionType) => data.animal === type);
     });
   };
 

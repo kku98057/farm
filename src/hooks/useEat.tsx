@@ -27,11 +27,11 @@ export default function useEat() {
   const { mutate } = useUpdate({ url: "/api/animal/feed" });
 
   const eatHandler = ({
-    grade,
+    feedId,
     name,
     exp,
   }: {
-    grade?: number;
+    feedId: number;
     name: string;
     exp: number;
   }) => {
@@ -39,17 +39,21 @@ export default function useEat() {
     mutate(
       {
         animal_id: myCharacter.id,
-        feed_id: grade,
+        feed_id: feedId,
       },
       {
-        onError: (error) => {
+        onError: (error: any) => {
           setGlobalLoading(false);
-          // setPopup((prev) => ({ ...prev, popup: true }));
+          setPopup((prev) => ({
+            text: error.response.data.message,
+            popup: true,
+          }));
           console.error(error);
           alert(error);
           return;
         },
         onSuccess: (res) => {
+          console.log(res);
           setGlobalLoading(false);
           if (
             levelStatus.levelStatus === "evolution" ||
@@ -73,16 +77,23 @@ export default function useEat() {
           //     quantity: name === item.name ? item.quantity - 1 : item.quantity,
           //   }))
           // );
-          setMyCharacter((prev) => ({
-            ...prev,
-            acquired_exp: prev.acquired_exp + exp + 1000,
-          }));
+          // setMyCharacter((prev) => ({
+          //   ...prev,
+          //   acquired_exp: prev.acquired_exp + exp + 1000,
+          // }));
 
           // setPopup((prev) => ({ ...prev, popup: true }));
         },
-        onSettled: () => {
+
+        onSettled: (data, a) => {
           queryClient.invalidateQueries({
-            queryKey: ["/api/inventory/feed", "/api/main"],
+            queryKey: ["/api/inventory/feed"],
+          });
+          queryClient.invalidateQueries({
+            queryKey: ["/api/main"],
+          });
+          queryClient.invalidateQueries({
+            queryKey: ["/api/inventory/animal"],
           });
         },
       }

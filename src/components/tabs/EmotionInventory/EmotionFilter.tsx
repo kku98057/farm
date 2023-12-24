@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { EmotionAnimalType, EmotionTabType, EmotionType } from "../../../types";
+import { EmotionAnimalType, EmotionTabType, ActionType } from "../../../types";
 import useGetAxios from "../../../hooks/useGetAxios";
 import { AtomEmotionList } from "../../../store";
 import { tabStyle } from "../../../style";
@@ -9,7 +9,7 @@ export function EmotionFilter({
   tab,
   setTab,
 }: {
-  emotionItem: EmotionType[];
+  emotionItem: ActionType[];
   tab: { animal_id: number; type: string; emotion: string };
   setTab: React.Dispatch<React.SetStateAction<EmotionTabType>>;
 }) {
@@ -28,7 +28,7 @@ export function EmotionFilter({
           if (value === "all") {
             return item;
           }
-          return item.emotion === value && tab.type === "all";
+          return item.action === value && tab.type === "all";
         })
       );
     } else {
@@ -37,7 +37,7 @@ export function EmotionFilter({
           if (value === "all") {
             return tab.type === item.animal;
           }
-          return item.emotion === value && tab.type === item.animal;
+          return item.action === value && tab.type === item.animal;
         })
       );
     }

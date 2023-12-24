@@ -2,59 +2,50 @@ import { buttonStyle, tabStyle } from "../../style";
 import { cat, dog, horse } from "../../asset";
 import { useEffect, useState } from "react";
 import ClickButton from "../buttons/ClickButton";
-import { ClickType, EmotionType } from "../../types";
+import { ClickType, ActionType } from "../../types";
 import useGetAxios from "../../hooks/useGetAxios";
 import Loading from "../Loading";
-import { useRecoilState } from "recoil";
-import { AtomEmotionList } from "../../store";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { AtomEmotionList, AtomLevelPopup, AtomLoading } from "../../store";
 import useUpdate from "../../hooks/useUpdate";
+import { useQueryClient } from "@tanstack/react-query";
 
-export default function CharactorInventory({
+export default function EmotionCharactorInventory({
   tab,
 }: {
   tab: { type: string; animal_id: number; emotion: string };
 }) {
-  const [equip, setEquip] = useState<EmotionType[]>([]);
+  const [equip, setEquip] = useState<ActionType[]>([]);
   const [clicked, setClicked] = useState<null | number>(null);
   // 기린,사자,판다,양
 
   const [ivnentoryLength, setIvnentoryLength] = useState(0);
   const [emotionList, setEmotionList] = useRecoilState(AtomEmotionList);
 
-  const { data: emotionItem, isLoading } = useGetAxios({
-    url: "/api/inventory/animal-emotion",
+  const { data: ActionItem, isLoading } = useGetAxios({
+    url: "/api/inventory/animal-action",
     params: {
       animal_id: tab.animal_id,
-      emotion_id: 0,
+      action_id: 0,
     },
   });
-
+  const { data } = useGetAxios({ url: "/api/inventory/action-category" });
+  console.log(ActionItem, data);
   useEffect(() => {
-    if (emotionItem && !isLoading) {
+    if (ActionItem && !isLoading) {
       setIvnentoryLength(
-        emotionItem.list.length % 2 === 1
-          ? emotionItem.list.length + 1
-          : emotionItem.list.length
+        ActionItem.list.length % 2 === 1
+          ? ActionItem.list.length + 1
+          : ActionItem.list.length
       );
 
-      setEmotionList([
-        ...emotionItem.list,
-        { emotion_id: 34, animal: "기린", emotion: "슬픔", is_equip: false },
-        { emotion_id: 35, animal: "기린", emotion: "슬픔", is_equip: false },
-        { emotion_id: 36, animal: "기린", emotion: "슬픔", is_equip: false },
-        { emotion_id: 37, animal: "기린", emotion: "슬픔", is_equip: false },
-      ]);
+      setEmotionList([...ActionItem.list]);
     }
-  }, [emotionItem, isLoading]);
-  useEffect(() => {
-    if (emotionList) {
-      setEquip(emotionList.filter((item) => item.is_equip === true));
-    }
-  }, [emotionList]);
+  }, [ActionItem, isLoading]);
 
   const filteredEmotion = (data: { type: string; animal_id: number }) => {
     if (data.type === "all") {
-      return emotionList.map((list: EmotionType, idx: number) => (
+      return emotionList.map((list: ActionType, idx: number) => (
         <List
           list={list}
           equip={equip}
@@ -65,8 +56,8 @@ export default function CharactorInventory({
       ));
     } else {
       return emotionList
-        .filter((item: EmotionType) => item.animal === data.type)
-        .map((list: EmotionType, idx: number) => (
+        .filter((item: ActionType) => item.animal === data.type)
+        .map((list: ActionType, idx: number) => (
           <List
             list={list}
             setEquip={setEquip}
@@ -77,6 +68,7 @@ export default function CharactorInventory({
         ));
     }
   };
+  console.log(emotionList);
 
   return (
     <div className={tabStyle.charactorInventory_wrap}>
@@ -88,7 +80,7 @@ export default function CharactorInventory({
         </div>
         {!isLoading ? (
           <div className={tabStyle.inventory_items}>
-            {emotionList.map((list: EmotionType, idx: number) => (
+            {emotionList.map((list: ActionType, idx: number) => (
               <List
                 list={list}
                 equip={equip}
@@ -113,38 +105,50 @@ const List = ({
   clicked,
   setClicked,
 }: {
-  list: EmotionType;
-  setEquip: React.Dispatch<React.SetStateAction<EmotionType[]>>;
-  equip: EmotionType[];
+  list: ActionType;
+  setEquip: React.Dispatch<React.SetStateAction<ActionType[]>>;
+  equip: ActionType[];
   clicked: number | null;
   setClicked: (state: number | null) => void;
 }) => {
-  // 클릭
-  const { mutate } = useUpdate({ url: "/api/inventory/animal-emotion" });
+  const setGlobalLoading = useSetRecoilState(AtomLoading);
+  const [popup, setPopup] = useRecoilState(AtomLevelPopup);
+  const queryClient = useQueryClient();
+  const { mutate } = useUpdate({ url: "/api/inventory/animal-action" });
   const clickHandler = (e: ClickType, id: number) => {
     e.stopPropagation();
     setClicked(id);
   };
+
   // 장착하기
-  const equipHandler = (e: ClickType, list: EmotionType) => {
+  const equipHandler = (e: ClickType, list: ActionType) => {
     //갯수체크
 
     e.stopPropagation();
-
-    const result = equip.some((item: EmotionType) => {
-      return item.emotion === list.emotion;
-    });
-    if (result) {
-      return;
-    }
+    // setGlobalLoading(true);
+    console.log(list);
     setEquip((prev) => [...prev, list]);
     mutate(
       {
-        emotion_id: list.emotion_id,
+        action_id: list.action_id,
+        category_id: list.category_id,
       },
       {
+        onSuccess: (res: any) => {
+          console.log(res);
+          setGlobalLoading(false);
+          setPopup({ text: res.data.message, popup: true });
+        },
         onError: (error) => {
           console.error(error);
+          setGlobalLoading(false);
+        },
+        onSettled: () => {
+          setGlobalLoading(false);
+          queryClient.invalidateQueries({ queryKey: ["/api/main"] });
+          queryClient.invalidateQueries({
+            queryKey: ["/api/inventory/animal-action"],
+          });
         },
       }
     );
@@ -154,11 +158,7 @@ const List = ({
   const euipedHandler = () => {
     // 같은 종류의 아이템 장착x
 
-    const result = equip.some((item: EmotionType) => {
-      return item.emotion_id === list.emotion_id;
-    });
-
-    return !result ? (
+    return !list.is_equip ? (
       <ClickButton
         className={buttonStyle.equipBtn}
         text="장착하기"
@@ -172,39 +172,41 @@ const List = ({
       />
     );
   };
-  const equipClearHandler = (e: ClickType, list: EmotionType) => {
+  const equipClearHandler = (e: ClickType, list: ActionType) => {
     e.stopPropagation();
-    setEquip((prev: EmotionType[]) =>
-      prev.filter((item) => item.emotion !== list.emotion)
+    setEquip((prev: ActionType[]) =>
+      prev.filter((item) => item.action !== list.action)
     );
     setClicked(null);
   };
   const euipedStyle = () => {
-    const result = equip.some((item: EmotionType) => {
-      return item.emotion_id === list.emotion_id;
-    });
-
-    return equip.map(
-      (item) =>
-        item.emotion_id === list.emotion_id && (
-          <div className={tabStyle.equip_active}></div>
-        )
-    );
+    return list.is_equip && <div className={tabStyle.equip_active}></div>;
+  };
+  const lockedStyle = () => {
+    return list.is_lock && <div className={tabStyle.lock_active}>잠금</div>;
   };
   return (
     <li
       className={`${tabStyle.tab_box} ${tabStyle.item_list} `}
-      onClick={(e) => clickHandler(e, list.emotion_id)}
+      onClick={(e) => {
+        if (!list.is_lock) {
+          clickHandler(e, list.action_id);
+        }
+      }}
     >
-      {euipedStyle()}
-      <span>{list.emotion}</span>
+      {euipedStyle()} {lockedStyle()}
+      <span>{list.action}</span>
       <span>{list.animal}</span>
       <div
         className={`${tabStyle.equip_tab} ${
-          clicked === list.emotion_id ? `${tabStyle.active}` : ""
+          clicked === list.action_id ? `${tabStyle.active}` : ""
         }`}
       >
-        {euipedHandler()}
+        <ClickButton
+          className={buttonStyle.equipBtn}
+          text={list.is_equip ? "장착해제" : "장착하기"}
+          clickHandler={(e) => equipHandler(e, list)}
+        />
 
         <ClickButton
           className={buttonStyle.equipCancelBtn}

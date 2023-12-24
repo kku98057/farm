@@ -26,7 +26,7 @@ export default function AnimalsInfo() {
       />
       <div className={tabStyle.animal_status}>
         <AnimalStatList title="동물레벨" status={myCharacter.level} />
-        <AnimalStatList title="누적 수면점수" status={userDatas.total_exp} />
+        {/* <AnimalStatList title="누적 수면점수" status={userDatas.total_exp} /> */}
       </div>
       <div className="btns" style={{ marginTop: 10, minHeight: 40 }}>
         <EvolutionBtns

@@ -1,9 +1,9 @@
-import { tabStyle } from "../../../style";
+import { tabStyle } from "../../../../style";
 
-import { tabDatasType } from "../../../types";
+import { tabDatasType } from "../../../../types";
 
 import FeedInventory from "./FeedInventory";
-import BackButton from "../../buttons/BackButton";
+import BackButton from "../../../buttons/BackButton";
 
 export default function FeedInventoryTab({
   tabDatas,

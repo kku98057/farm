@@ -28,7 +28,7 @@ export default function EmotionInventoryTab({
   });
 
   const { data: emotionItem, isLoading: itemLoading } = useGetAxios({
-    url: "/api/inventory/animal-emotion",
+    url: "/api/inventory/animal-action",
     params: {
       animal_id: 0,
       emotion_id: 0,

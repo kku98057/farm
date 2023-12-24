@@ -25,6 +25,7 @@ export default function AnimalsList({
     AtomAnimalTabCurrentTabAnimal
   );
   const setHeaderTab = useSetRecoilState(AtomHeaderTab);
+  console.log(list);
   return (
     <li
       className={`${tabStyle.animal_list} ${
@@ -59,7 +60,7 @@ export default function AnimalsList({
           />
         </div>
         <div className={tabStyle.animals_tab_bottom}>
-          <AnimalsExp />
+          <AnimalsExp percent_exp={list.percent_exp} />
         </div>
       </div>
     </li>

@@ -27,7 +27,7 @@ import { ShopCategory } from "../../config/constant";
 import BackButton from "../buttons/BackButton";
 import ShopListTab from "../shop/ShopListTab";
 import SubmitButton from "../buttons/SubmitButton";
-import FeedInventory from "./feedInven/FeedInventory";
+import FeedInventory from "./inventory/feedInven/FeedInventory";
 import ShopFeedInventory from "../shop/ShopFeedInventory";
 
 export default function ShopTab({ tabDatas }: { tabDatas: tabDatasType }) {

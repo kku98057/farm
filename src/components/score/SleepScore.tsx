@@ -24,7 +24,7 @@ export default function SleepScore({
     <div className={scoreStyle.sleep_score}>
       <div className={scoreStyle.sleep_exp}>
         <span>{animal}</span>
-        <span> {`${currentExpHandler().toFixed(0)}%`}</span>
+        <span> {`${currentExpHandler().toFixed()}%`}</span>
       </div>
       <ul className={scoreStyle.score_ul}>
         <li className={scoreStyle.sleep_score_bar}>

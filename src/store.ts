@@ -3,11 +3,13 @@ import {
   AlarmType,
   FoodItemsType,
   LevelStatusType,
-  EmotionType,
+  ActionType,
   MyAnimalType,
   userType,
   FeedType,
   FriendType,
+  MainAlarmType,
+  MainCurrency,
 } from "./types";
 import { cat, dog, horse } from "./asset";
 
@@ -22,6 +24,20 @@ export const AtomFooterTab = atom<string>({
 export const AtomFeed = atom<FeedType[]>({
   key: "AtomFeedKey",
   default: [],
+});
+export const AtomAlarm = atom<MainAlarmType>({
+  key: "AtomAlarmKey",
+  default: {
+    count: 0,
+    is_alarm: false,
+  },
+});
+export const AtomCurrency = atom<MainCurrency>({
+  key: "AtomCurrencyKey",
+  default: {
+    point: 0,
+    crystal: 0,
+  },
 });
 
 export const AtomMyFeedTime = atom<{ gain_feed: number; use_feed: number }>({
@@ -50,13 +66,15 @@ export const AtomMyCharacter = atom<MyAnimalType>({
   key: "animalsKey",
   default: {
     acquired_exp: 0,
+    evolution_status: "first",
     id: null,
-    level: 99,
-    name: "",
-    next_exp: 9999999,
+    is_growth: false,
+    level: 999,
+    name: "기린",
+    next_exp: 99999,
     percent_exp: 0,
+    remain_next_level_time: 0,
     status: "wakeup",
-    total_exp: 0,
   },
 });
 export const AtomAnimalsList = atom({
@@ -66,14 +84,8 @@ export const AtomAnimalsList = atom({
 export const AtomUser = atom<userType>({
   key: "userKey",
   default: {
-    acquired_exp: 0,
-    currency: 0,
-    id: null,
-    level: 1,
-    next_exp: 0,
     nickname: "",
-    percent_exp: 0,
-    total_exp: 0,
+    sleep_score: 0,
   },
 });
 
@@ -143,10 +155,6 @@ export const AtomShopFoodList = atom({
 export const AtomUserNickname = atom({
   key: "AtomUserNicknameKey",
   default: "",
-});
-export const AtomCurrency = atom({
-  key: "AtomCurrencyKey",
-  default: 0,
 });
 
 export const AtomMyFood = atom<FoodItemsType[]>({
@@ -230,7 +238,7 @@ export const AtomAlarmList = atom<AlarmType[]>({
   default: [],
 });
 
-export const AtomEmotionList = atom<EmotionType[]>({
+export const AtomEmotionList = atom<ActionType[]>({
   key: "AtomEmotionListKey",
   default: [],
 });

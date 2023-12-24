@@ -4,11 +4,13 @@ import { gamestone, stone } from "../../asset";
 
 import { HeaderList } from "../../config/constant";
 import { layoutStyle, tabStyle } from "../../style";
-import { ConstantType, userType } from "../../types";
+import { ConstantType } from "../../types";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
+  AtomAlarm,
   AtomAlarmLength,
   AtomAlarmReadLength,
+  AtomCurrency,
   AtomHeaderTab,
   AtomLevelPopup,
   AtomUser,
@@ -16,7 +18,8 @@ import {
 
 export default function Header() {
   const [userData, setUserData] = useRecoilState(AtomUser);
-
+  const [mainCurrencyData, setMainCurrencyData] = useRecoilState(AtomCurrency);
+  console.log(mainCurrencyData);
   return (
     <header className={layoutStyle.header}>
       <div className={layoutStyle.header_ul}>
@@ -26,11 +29,11 @@ export default function Header() {
         <div className={layoutStyle.header_user}>
           <div className={layoutStyle.myCurrency}>
             <img src={stone} alt="수면포인트" />
-            <span>{userData.total_exp.toLocaleString()}</span>
+            <span>{mainCurrencyData.point.toLocaleString()}</span>
           </div>
           <div className={layoutStyle.myCurrency}>
             <img src={gamestone} alt="crystal" />
-            <span>{userData.currency.toLocaleString()}</span>
+            <span>{mainCurrencyData.crystal.toLocaleString()}</span>
           </div>
         </div>
       </div>
@@ -41,27 +44,15 @@ export default function Header() {
 const HeaderListUi = ({ list }: { list: ConstantType }) => {
   const setHeaderTab = useSetRecoilState(AtomHeaderTab);
 
-  const userData = useRecoilValue(AtomUser);
   const setPopup = useSetRecoilState(AtomLevelPopup);
-
+  const [mainAlarmData, setMainyAlarmData] = useRecoilState(AtomAlarm);
   const alarmLength = useRecoilValue(AtomAlarmLength);
   const alarmReadLength = useRecoilValue(AtomAlarmReadLength);
 
   return (
-    <li
-      className={layoutStyle.list}
-      onClick={() => {
-        if (userData.level < 2 && list.title === "feed_inventory") {
-          setPopup({ text: "레벨2부터 사용가능합니다.", popup: true });
-          return;
-        }
-        setHeaderTab(list.title);
-      }}
-    >
-      {list.title === "alarm" && alarmLength > 0 && alarmReadLength > 0 ? (
-        <span className={tabStyle.alarm_length}>
-          {alarmReadLength < alarmLength ? alarmReadLength : alarmLength}
-        </span>
+    <li className={layoutStyle.list} onClick={() => setHeaderTab(list.title)}>
+      {mainAlarmData.count > 0 ? (
+        <span className={tabStyle.alarm_length}>{alarmLength}</span>
       ) : (
         ""
       )}

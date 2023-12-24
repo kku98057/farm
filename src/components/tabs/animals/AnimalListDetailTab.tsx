@@ -24,9 +24,9 @@ export default function AnimalListDetailTab({
     }
   }, [currentAniamlTabId]);
   return (
-    <div className={tabStyle.tab_wrap} style={{ gap: 0 }}>
+    <div className={tabStyle.tab_wrap}>
       <BackButton back={"animals"} title="동물 상세정보" />
-      <div className={tabStyle.animal_detail}>
+      {/* <div className={tabStyle.animal_detail}>
         <div className={tabStyle.animal_detail_img}>
           <Lottie animationData={sheep}></Lottie>
         </div>
@@ -34,7 +34,7 @@ export default function AnimalListDetailTab({
           <h3>이름</h3>
           <span>어쩌고 저쩌고</span>
         </div>
-      </div>
+      </div> */}
       <div className={tabStyle.tab_inner}>
         <CharactorInventory tab={tab} />
       </div>
