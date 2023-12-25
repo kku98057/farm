@@ -33,8 +33,12 @@ export default function useGetAxios({
         );
 
         return response.data;
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
+        if (error.response.status === 401) {
+          alert("접근권한이 없습니다.");
+          window.location.href = "https://naver.com";
+        }
+
         throw error; // 에러를 다시 throw하여 useQuery의 error 객체에 포함시킵니다.
       } finally {
         setGlobalLoading(false); // 요청 완료 시 로딩 상태 비활성화

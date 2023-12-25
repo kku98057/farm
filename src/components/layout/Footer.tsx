@@ -1,13 +1,15 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { FooterList, HeaderList } from "../../config/constant";
+import { FooterList } from "../../config/constant";
 import { layoutStyle, tabStyle } from "../../style";
 import { ConstantType } from "../../types";
 import Container from "./Container";
 import {
   AtomAlarmLength,
   AtomAlarmReadLength,
+  AtomAnimalsList,
   AtomHeaderTab,
   AtomLevelPopup,
+  AtomMyCharacter,
   AtomUser,
 } from "../../store";
 import { useState, useEffect } from "react";
@@ -28,17 +30,23 @@ export default function Footer() {
 
 const FooterListUi = ({ list }: { list: ConstantType }) => {
   const setHeaderTab = useSetRecoilState(AtomHeaderTab);
+  const myCharacter = useRecoilValue(AtomMyCharacter);
 
   const userData = useRecoilValue(AtomUser);
   const setPopup = useSetRecoilState(AtomLevelPopup);
 
   const alarmLength = useRecoilValue(AtomAlarmLength);
   const alarmReadLength = useRecoilValue(AtomAlarmReadLength);
+  console.log(list.name);
   return (
     <li
       className={layoutStyle.list}
       onClick={() => {
-        setHeaderTab(list.title);
+        if (list.name === "보관함") {
+          setHeaderTab({ name: list.title });
+          return;
+        }
+        setHeaderTab({ name: list.title });
       }}
     >
       {list.title === "alarm" && alarmLength > 0 && alarmReadLength > 0 ? (

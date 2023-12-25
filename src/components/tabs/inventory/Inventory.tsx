@@ -1,25 +1,11 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { tabStyle } from "../../../style";
-import {
-  AtomMyCharacter,
-  AtomFooterTab,
-  AtomAnimalsList,
-  AtomHeaderTab,
-} from "../../../store";
-import { useEffect, useState } from "react";
 
-import { tabDatasType, SubmitType, AnimalsType } from "../../../types";
-import Notice from "../../Notice";
-import TabTop from "../../layout/TabTop";
-import useGetAxios from "../../../hooks/useGetAxios";
+import { useState } from "react";
 
-import SubmitButton from "../../buttons/SubmitButton";
-import Loading from "../../Loading";
-import useUpdate from "../../../hooks/useUpdate";
-import Cookies from "js-cookie";
-import AnimalsList from "../animals/AnimalsList";
+import { tabDatasType } from "../../../types";
+
 import BackButton from "../../buttons/BackButton";
-import InventoryTab from "../animals/InventoryListTab";
+
 import FeedInventory from "./feedInven/FeedInventory";
 import InventoryListTab from "../animals/InventoryListTab";
 import AnimalInventory from "./animalInven/AnimalInventory";

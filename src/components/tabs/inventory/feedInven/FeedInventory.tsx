@@ -52,8 +52,6 @@ export default function FeedInventory() {
         {
           onError: (error) => {
             setGlobalLoading(false);
-            console.error(error);
-            alert(error);
           },
           onSuccess: () => {
             setGlobalLoading(false);

@@ -1,10 +1,14 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AnimalList } from "../../../config/constant";
 import { buttonStyle, tabStyle } from "../../../style";
 import ClickButton from "../../buttons/ClickButton";
 import AnimalsExp from "./AnimalsExp";
 import AnimalsName from "./AnimalsName";
-import { AtomAnimalTabCurrentTabAnimal, AtomHeaderTab } from "../../../store";
+import {
+  AtomAnimalTabCurrentTabAnimal,
+  AtomHeaderTab,
+  AtomMyCharacter,
+} from "../../../store";
 
 interface AnimalListType {
   list: any;
@@ -25,7 +29,7 @@ export default function AnimalsList({
     AtomAnimalTabCurrentTabAnimal
   );
   const setHeaderTab = useSetRecoilState(AtomHeaderTab);
-  console.log(list);
+  const myCharacter = useRecoilValue(AtomMyCharacter);
   return (
     <li
       className={`${tabStyle.animal_list} ${
@@ -54,7 +58,7 @@ export default function AnimalsList({
             className={buttonStyle.detailBtn}
             text="행동 목록"
             clickHandler={() => {
-              setHeaderTab("animals_detail");
+              setHeaderTab({ name: "animals_detail" });
               setAnimalTabCurrentTabAnimal(list.id);
             }}
           />

@@ -1,23 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { buttonStyle, tabStyle } from "../../../../style";
 import { AnimalsType, ClickType, SubmitType } from "../../../../types";
 import Loading from "../../../Loading";
 import SubmitButton from "../../../buttons/SubmitButton";
 import AnimalsList from "../../animals/AnimalsList";
 import useGetAxios from "../../../../hooks/useGetAxios";
-import { useRecoilState } from "recoil";
-import { AtomHeaderTab } from "../../../../store";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { AtomHeaderTab, AtomMyCharacter } from "../../../../store";
 import useUpdate from "../../../../hooks/useUpdate";
 import ClickButton from "../../../buttons/ClickButton";
 import { useQueryClient } from "@tanstack/react-query";
 
 export default function AnimalInventory() {
   const queryClient = useQueryClient();
+
   const [headerTab, setHeaderTab] = useRecoilState(AtomHeaderTab);
   const { data: animalsData, isLoading: isLoadingAnimalsData } = useGetAxios({
     url: `/api/inventory/animal`,
   });
-
+  const myCharacter = useRecoilValue(AtomMyCharacter);
   const { mutate } = useUpdate({ url: "/api/animal", isAlert: "noAlert" });
   const [animalClicked, setAnimalClicked] = useState<{
     name: string;
@@ -28,6 +29,13 @@ export default function AnimalInventory() {
     image: null,
     id: null,
   });
+  useEffect(() => {
+    setAnimalClicked({
+      name: myCharacter.name,
+      image: null,
+      id: myCharacter.id,
+    });
+  }, []);
   const submitHandler = (e: ClickType) => {
     mutate(
       {
@@ -36,7 +44,7 @@ export default function AnimalInventory() {
 
       {
         onSuccess: () => {
-          setHeaderTab("");
+          setHeaderTab({ name: "" });
         },
         onError: (error) => {
           console.error(error);
@@ -55,6 +63,7 @@ export default function AnimalInventory() {
       id: id,
     });
   };
+
   return (
     <>
       <div className={tabStyle.tab_inner}>

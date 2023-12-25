@@ -3,6 +3,7 @@ import { buttonStyle, tabStyle } from "../../../style";
 import { MdDeleteOutline } from "react-icons/md";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
+  AtomAlarm,
   AtomAlarmLength,
   AtomAlarmList,
   AtomAlarmReadLength,
@@ -24,9 +25,11 @@ export default function AlarmTab({
   const setAlarmLength = useSetRecoilState(AtomAlarmLength);
   const setAlarmReadLength = useSetRecoilState(AtomAlarmReadLength);
   const [alarmListData, setAlarmListData] = useRecoilState(AtomAlarmList);
+  const setMainCurrencyAlarmData = useSetRecoilState(AtomAlarm);
 
   useEffect(() => {
     setAlarmList(alarmListData);
+    setMainCurrencyAlarmData((prev) => ({ ...prev, is_alarm: false }));
   }, []);
   useEffect(() => {
     setAlarmLength(alarmList.length);

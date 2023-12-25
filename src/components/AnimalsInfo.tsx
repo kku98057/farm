@@ -26,7 +26,7 @@ export default function AnimalsInfo() {
       />
       <div className={tabStyle.animal_status}>
         <AnimalStatList title="동물레벨" status={myCharacter.level} />
-        {/* <AnimalStatList title="누적 수면점수" status={userDatas.total_exp} /> */}
+        <AnimalStatList title="동물상태" status={myCharacter.status} />
       </div>
       <div className="btns" style={{ marginTop: 10, minHeight: 40 }}>
         <EvolutionBtns
@@ -71,8 +71,21 @@ function AnimalStatList({
         return "Lv";
       case "포인트":
         return "P";
+
       default:
         return;
+    }
+  };
+  const transformStatus = (status: string | number) => {
+    switch (status) {
+      case "wakeup":
+        return "보통";
+      case "active":
+        return "활동중";
+      case "sleep":
+        return "자는";
+      default:
+        return status;
     }
   };
 
@@ -80,7 +93,8 @@ function AnimalStatList({
     <div className={tabStyle.animal_status_list}>
       <p className={tabStyle.animal_status_title}>{title}</p>
       <p className={tabStyle.animal_status_data}>
-        {status?.toLocaleString()}
+        {transformStatus(status)}
+        {/* {status?.toLocaleString()} */}
         {unit(title)}
       </p>
     </div>

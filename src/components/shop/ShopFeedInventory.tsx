@@ -1,11 +1,10 @@
-import { useEffect } from "react";
 import { buttonStyle, layerStyle, tabStyle } from "../../style";
-import { cat, dog, feed, horse, salad, watermelon } from "../../asset";
+import { feed } from "../../asset";
 import { useState } from "react";
 import ClickButton from "../buttons/ClickButton";
-import { ClickType, MarketItemType, MarketType } from "../../types";
-import useEat from "../../hooks/useEat";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { MarketItemType } from "../../types";
+
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import {
   AtomCurrency,
@@ -13,7 +12,7 @@ import {
   AtomLevelPopup,
   AtomLoading,
 } from "../../store";
-import CreateTextAnimation from "../../Fn/CreateTextAnimation";
+
 import useGetAxios from "../../hooks/useGetAxios";
 import Popup from "../Popup";
 import useUpdate from "../../hooks/useUpdate";
@@ -24,7 +23,6 @@ export default function ShopFeedInventory() {
   const [popup, setPopup] = useState({ popup: false, type: "" });
   const setPopup2 = useSetRecoilState(AtomLevelPopup);
   const [globalLoading, setGlobalLoading] = useRecoilState(AtomLoading);
-  const [myFeed, setMyFeed] = useRecoilState(AtomFeed);
 
   const [pickItem, setPickItem] = useState<MarketItemType>({
     name: "",
@@ -140,13 +138,6 @@ export default function ShopFeedInventory() {
               clickHandler={() => pickHandler(list, "point")}
               className={`${buttonStyle.buyBtn} ${buttonStyle.wideBtn}  ${buttonStyle.pointColor} `}
             />
-            {/* {list.name === "일반먹이" && (
-              <ClickButton
-                text="먹이권으로 구매"
-                clickHandler={() => pickHandler(list, "ticket")}
-                className={`${buttonStyle.buyBtn} ${buttonStyle.wideBtn}  ${buttonStyle.ticketColor}`}
-              />
-            )} */}
           </div>
         </li>
       );

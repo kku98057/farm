@@ -44,19 +44,18 @@ export default function Header() {
 const HeaderListUi = ({ list }: { list: ConstantType }) => {
   const setHeaderTab = useSetRecoilState(AtomHeaderTab);
 
-  const setPopup = useSetRecoilState(AtomLevelPopup);
   const [mainAlarmData, setMainyAlarmData] = useRecoilState(AtomAlarm);
-  const alarmLength = useRecoilValue(AtomAlarmLength);
-  const alarmReadLength = useRecoilValue(AtomAlarmReadLength);
 
   return (
-    <li className={layoutStyle.list} onClick={() => setHeaderTab(list.title)}>
-      {mainAlarmData.count > 0 ? (
-        <span className={tabStyle.alarm_length}>{alarmLength}</span>
+    <li
+      className={layoutStyle.list}
+      onClick={() => setHeaderTab({ name: list.title })}
+    >
+      {mainAlarmData.is_alarm ? (
+        <span className={tabStyle.alarm_length}>{mainAlarmData.count}</span>
       ) : (
         ""
       )}
-
       <div>
         <img src={list.image} alt={list.name} />
       </div>

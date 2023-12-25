@@ -21,7 +21,17 @@ export interface MyAnimalType {
   percent_exp: number;
   remain_next_level_time: number;
   status: string;
+  action: MainActionType[];
 }
+export interface MainActionType {
+  category: string;
+  properties: MainActionPropertiesType[];
+}
+export interface MainActionPropertiesType {
+  skin_code: number;
+  skin_name: string;
+}
+
 export interface userType {
   nickname: string;
   sleep_score: number;
@@ -145,10 +155,9 @@ export type AnimalStatus = {
   sleepy: AnimalEvolutionImgType;
 };
 export interface AnimalEvolutionImgType {
-  first: string;
-  second: string;
-  third: string;
-  final: any;
+  [key: string]: {
+    [key: string]: string | any;
+  };
 }
 export type emotionListType = {
   id: number;
@@ -194,6 +203,23 @@ export interface FriendType {
   friend_id: number;
   friend_name: string;
   status: string;
+}
+export interface MyFriendViewType {
+  user: MyFriendUserViewType;
+  animal: MyFriendAnimalViewType;
+}
+export interface MyFriendUserViewType {
+  avatar: string;
+  id: number;
+  nickname: string;
+}
+export interface MyFriendAnimalViewType {
+  id: number;
+  level: number;
+  name: string;
+  status: string;
+  evolution_status: string;
+  action: MainActionType[];
 }
 export interface MainAlarmType {
   count: number;

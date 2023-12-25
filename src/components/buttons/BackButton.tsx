@@ -18,9 +18,9 @@ export default function BackButton({
         className={tabStyle.tab_close}
         onClick={() => {
           if (back !== "") {
-            setHeaderTab(back);
+            setHeaderTab({ name: back });
           } else {
-            setHeaderTab("");
+            setHeaderTab({ name: "" });
           }
         }}
       />

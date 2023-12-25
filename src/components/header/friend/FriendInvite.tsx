@@ -61,21 +61,26 @@ export default function FriendInvite() {
     return axios
       .get(`${process.env.REACT_APP_BASE_URL}/api/friend/invite`, {
         headers: {
-          // Authorization: `Bearer ${TOKEN}`,
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZWZjYTY2MWNiMDUzNTc3YjQ2M2Y5ZDEzYzEyOWY1MWRmZmMzOTIxODE5MDAzZTFlYzc4NzBjMjg4NzU3YjAzNWQ3NjcxMmIzMmVjM2RhNjQiLCJpYXQiOjE3MDMyMDcyMDYuMzY5OTM4LCJuYmYiOjE3MDMyMDcyMDYuMzY5OTQyLCJleHAiOjE3MDQ1MDMyMDYuMzQ5NjEyLCJzdWIiOiI3OCIsInNjb3BlcyI6W119.EDgc7sBIrZ34sv5iItjPEd9cgyP2_YVDzwk3_LpZBb_ufK__6KuaBfOjRM0_0RXpRyWXjP72t4VLqNHhgACE7SgteDIDvcq5Knj6OJGUFpFFBiZyx4g_5BdXhF3UiWN6TWXXGmQiHUVybwM_wp_THeq5dKTpMcVljkpXMO-0vgcy1DYITVNRHOhl46N0Wviby8xlmm61d26w15UIOihoBCaUhWqXnuj-vIs-x4Pe5xhL8Qrpy7oCkLY1wVx6-c_hRrtdkIFrnADsbOXNDR2gCLWrM3UCbFpQXyZNdj1oKx1dc_RR0l8rUUTNbhzlgrBKDCjkdNPCUggWdpW08wJ7AzfRMk1HTEQ7GcFEZLGN3GQ00wkmwZhswzUx4cAEl2ms1OdLy32FZOVGuyBPdPRWVw9nMKJLruQmpgid-xvBPZSFxaGpiljK0c9ck3SgG31AUcHxFdJRsFmi9eBOnhYqcyXXV6QvNa16KWq38EJ0tiogt73ea2mbu1SIaBzbzMe-pLhBHvjTuWjQ-7Zc6UsSJ7Xgbhkp1ifhcLnQQnzEfJe_zP8axdzZ4D2kfenpaAB4mGnDsXPg-0B3eTAd_jlEAxQT7TNCl4_xZSfqVFtYKScH-_lDq4AVpKbbXtqgmYLCixquZ-aQ1H9phkm4YetTarztJN2MSdYk-J65lWGa56I`,
+          Authorization: `Bearer ${TOKEN}`,
           "Content-Type": "application/json",
         },
       })
-      .then((res) =>
+      .then((res) => {
+        console.log(res);
         navigator.clipboard
           .writeText(res.data.code)
-          .then(() => {
+          .then((res) => {
             setLoading(false);
             setPopup({ text: "초대코드가 복사되었습니다.", popup: true });
           })
-          .catch(() => setLoading(false))
-      )
-      .catch(() => setLoading(false));
+          .catch((error) => {
+            setLoading(false);
+          });
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error(error);
+      });
   };
   return (
     <form onSubmit={inviteHandler} className={tabStyle.friend_invite}>

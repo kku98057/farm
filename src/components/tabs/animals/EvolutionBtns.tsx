@@ -327,14 +327,10 @@ export default function EvolutionBtns({
     <>
       {myCharacter.remain_next_level_time <= 0 &&
         myCharacter.is_growth === false &&
-        myCharacter.acquired_exp < myCharacter.next_exp && <StatePending />}
+        myCharacter.acquired_exp < myCharacter.next_exp &&
+        myCharacter.level < 15 && <StatePending />}
       {myCharacter.remain_next_level_time > 0 &&
         myCharacter.is_growth === true && <ViewTimer />}
-      {/* {myCharacter.remain_next_level_time > 0 &&
-        myCharacter.is_growth === true &&
-        myCharacter.acquired_exp >= myCharacter.next_exp && (
-          <StateEvolution evolutionHandler={evolutionHandler} text="진화" />
-        )} */}
 
       {myCharacter.remain_next_level_time <= 0 &&
         myCharacter.is_growth === true && (

@@ -13,9 +13,15 @@ import {
 } from "./types";
 import { cat, dog, horse } from "./asset";
 
-export const AtomHeaderTab = atom<string>({
+export const AtomHeaderTab = atom<{
+  name: string;
+  params?: null | { [key: string]: string | number };
+}>({
   key: "AtomHeaderTabKey",
-  default: "",
+  default: {
+    name: "",
+    params: null,
+  },
 });
 export const AtomFooterTab = atom<string>({
   key: "AtomFooterTabKey",
@@ -75,6 +81,7 @@ export const AtomMyCharacter = atom<MyAnimalType>({
     percent_exp: 0,
     remain_next_level_time: 0,
     status: "wakeup",
+    action: [],
   },
 });
 export const AtomAnimalsList = atom({

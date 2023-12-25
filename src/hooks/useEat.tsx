@@ -48,8 +48,7 @@ export default function useEat() {
             text: error.response.data.message,
             popup: true,
           }));
-          console.error(error);
-          alert(error);
+
           return;
         },
         onSuccess: (res) => {

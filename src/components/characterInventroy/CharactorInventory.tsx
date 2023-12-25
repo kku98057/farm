@@ -6,7 +6,12 @@ import { ClickType, ActionType } from "../../types";
 import useGetAxios from "../../hooks/useGetAxios";
 import Loading from "../Loading";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { AtomEmotionList, AtomLevelPopup, AtomLoading } from "../../store";
+import {
+  AtomEmotionList,
+  AtomLevelPopup,
+  AtomLoading,
+  AtomMyCharacter,
+} from "../../store";
 import useUpdate from "../../hooks/useUpdate";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -17,7 +22,6 @@ export default function EmotionCharactorInventory({
 }) {
   const [equip, setEquip] = useState<ActionType[]>([]);
   const [clicked, setClicked] = useState<null | number>(null);
-  // 기린,사자,판다,양
 
   const [ivnentoryLength, setIvnentoryLength] = useState(0);
   const [emotionList, setEmotionList] = useRecoilState(AtomEmotionList);
@@ -29,8 +33,7 @@ export default function EmotionCharactorInventory({
       action_id: 0,
     },
   });
-  const { data } = useGetAxios({ url: "/api/inventory/action-category" });
-  console.log(ActionItem, data);
+
   useEffect(() => {
     if (ActionItem && !isLoading) {
       setIvnentoryLength(
@@ -42,33 +45,6 @@ export default function EmotionCharactorInventory({
       setEmotionList([...ActionItem.list]);
     }
   }, [ActionItem, isLoading]);
-
-  const filteredEmotion = (data: { type: string; animal_id: number }) => {
-    if (data.type === "all") {
-      return emotionList.map((list: ActionType, idx: number) => (
-        <List
-          list={list}
-          equip={equip}
-          setEquip={setEquip}
-          clicked={clicked}
-          setClicked={setClicked}
-        />
-      ));
-    } else {
-      return emotionList
-        .filter((item: ActionType) => item.animal === data.type)
-        .map((list: ActionType, idx: number) => (
-          <List
-            list={list}
-            setEquip={setEquip}
-            equip={equip}
-            clicked={clicked}
-            setClicked={setClicked}
-          />
-        ));
-    }
-  };
-  console.log(emotionList);
 
   return (
     <div className={tabStyle.charactorInventory_wrap}>
@@ -122,10 +98,8 @@ const List = ({
 
   // 장착하기
   const equipHandler = (e: ClickType, list: ActionType) => {
-    //갯수체크
-
     e.stopPropagation();
-    // setGlobalLoading(true);
+
     console.log(list);
     setEquip((prev) => [...prev, list]);
     mutate(
@@ -135,12 +109,10 @@ const List = ({
       },
       {
         onSuccess: (res: any) => {
-          console.log(res);
           setGlobalLoading(false);
           setPopup({ text: res.data.message, popup: true });
         },
         onError: (error) => {
-          console.error(error);
           setGlobalLoading(false);
         },
         onSettled: () => {
@@ -155,23 +127,7 @@ const List = ({
 
     setClicked(null);
   };
-  const euipedHandler = () => {
-    // 같은 종류의 아이템 장착x
-
-    return !list.is_equip ? (
-      <ClickButton
-        className={buttonStyle.equipBtn}
-        text="장착하기"
-        clickHandler={(e) => equipHandler(e, list)}
-      />
-    ) : (
-      <ClickButton
-        className={buttonStyle.equipBtn}
-        text="해제하기"
-        clickHandler={(e) => equipClearHandler(e, list)}
-      />
-    );
-  };
+  // 장착해제
   const equipClearHandler = (e: ClickType, list: ActionType) => {
     e.stopPropagation();
     setEquip((prev: ActionType[]) =>
@@ -179,9 +135,11 @@ const List = ({
     );
     setClicked(null);
   };
+  // 장착시 스타일
   const euipedStyle = () => {
     return list.is_equip && <div className={tabStyle.equip_active}></div>;
   };
+  //잠금시 스타일
   const lockedStyle = () => {
     return list.is_lock && <div className={tabStyle.lock_active}>잠금</div>;
   };
