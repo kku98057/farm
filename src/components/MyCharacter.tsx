@@ -6,6 +6,24 @@ import { LevelStatusType, MyAnimalType } from "../types";
 import { AnimalListStatus } from "../config/constant";
 
 import Lottie from "lottie-react";
+import {
+  cat_final,
+  chicken_final,
+  dog_final,
+  dolphin_final,
+  duck_final,
+  giraffe_final,
+  horse,
+  horse_final,
+  owl_final,
+  panda__final,
+  parrot_final,
+  quokka_final,
+  rabbit_final,
+  rion_final,
+  seaotter_final,
+  sheep_final,
+} from "../asset";
 
 export default function MyCharacter({
   setLevelStatus,
@@ -28,7 +46,6 @@ export default function MyCharacter({
     );
   }
   const transformStatus = (status: string) => {
-    console.log(status);
     switch (status) {
       case "wakeup":
         return "기본";
@@ -40,17 +57,17 @@ export default function MyCharacter({
         return;
     }
   };
+  console.log(getImageSrc(myCharacter));
+  console.log(myCharacter);
 
   return (
     <>
       <div style={{ position: "relative", width: 240, margin: "0 auto" }}>
-        {myCharacter.evolution_status === "final" && (
+        {myCharacter.evolution_status === "final" ? (
           <Lottie animationData={getImageSrc(myCharacter)} loop={true}></Lottie>
-        )}
-        {myCharacter.evolution_status !== "final" && (
+        ) : (
           <img src={getImageSrc(myCharacter)} alt={myCharacter.name} />
         )}
-        {/* <img src={getImageSrc(myCharacter)} alt={myCharacter.name} /> */}
       </div>
     </>
   );

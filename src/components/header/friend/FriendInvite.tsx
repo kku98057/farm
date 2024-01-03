@@ -67,6 +67,7 @@ export default function FriendInvite() {
       })
       .then((res) => {
         console.log(res);
+        
         navigator.clipboard
           .writeText(res.data.code)
           .then((res) => {

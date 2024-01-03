@@ -1,5 +1,5 @@
 import { buttonStyle, tabStyle } from "../../style";
-import { cat, dog, horse } from "../../asset";
+import { cat, dog, horse, panda__final, panda_first_base } from "../../asset";
 import { useEffect, useState } from "react";
 import ClickButton from "../buttons/ClickButton";
 import { ClickType, ActionType } from "../../types";
@@ -14,6 +14,7 @@ import {
 } from "../../store";
 import useUpdate from "../../hooks/useUpdate";
 import { useQueryClient } from "@tanstack/react-query";
+import { AnimalListStatus } from "../../config/constant";
 
 export default function EmotionCharactorInventory({
   tab,
@@ -143,6 +144,7 @@ const List = ({
   const lockedStyle = () => {
     return list.is_lock && <div className={tabStyle.lock_active}>잠금</div>;
   };
+  console.log(list);
   return (
     <li
       className={`${tabStyle.tab_box} ${tabStyle.item_list} `}
@@ -152,6 +154,7 @@ const List = ({
         }
       }}
     >
+      {/* <img src={AnimalListStatus[list.animal as keyof typeof AnimalListStatus]['wakeup'][1]} alt="" /> */}
       {euipedStyle()} {lockedStyle()}
       <span>{list.action}</span>
       <span>{list.animal}</span>

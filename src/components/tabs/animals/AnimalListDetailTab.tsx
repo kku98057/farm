@@ -2,7 +2,7 @@ import Lottie from "lottie-react";
 import { tabStyle } from "../../../style";
 import { tabDatasType } from "../../../types";
 import BackButton from "../../buttons/BackButton";
-import { sheep } from "../../../asset";
+
 import CharactorInventory from "../../characterInventroy/CharactorInventory";
 import { useEffect, useState } from "react";
 

@@ -54,18 +54,7 @@ function FriendScore({ name }: { name: string }) {
     <div className={scoreStyle.sleep_score}>
       <div className={scoreStyle.sleep_exp}>
         <span>{name}</span>
-        {/* <span> {`${currentExpHandler().toFixed()}%`}</span> */}
       </div>
-      {/* <ul className={scoreStyle.score_ul}>
-      <li className={scoreStyle.sleep_score_bar}>
-        <div
-          className={`${scoreStyle.sleep_score_innerbar}`}
-          style={{
-            width: `${currentExpHandler().toFixed(0)}%`,
-          }}
-        ></div>
-      </li>
-    </ul> */}
     </div>
   );
 }

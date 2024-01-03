@@ -152,7 +152,7 @@ export type AnimalStatus = {
   [key: string]: AnimalEvolutionImgType;
   wakeup: AnimalEvolutionImgType;
   sleep: AnimalEvolutionImgType;
-  sleepy: AnimalEvolutionImgType;
+  active: AnimalEvolutionImgType;
 };
 export interface AnimalEvolutionImgType {
   [key: string]: {

@@ -100,7 +100,6 @@ export default function Home() {
     }
   }, [feedInventory, isLoadingFeedInventory]);
 
-  console.log(data);
   useEffect(() => {
     if (searchParams) {
       const tab: any = searchParams.get("tab");

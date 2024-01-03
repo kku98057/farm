@@ -34,6 +34,7 @@ export default function useGetAxios({
 
         return response.data;
       } catch (error: any) {
+        console.error(error);
         if (error.response.status === 401) {
           alert("접근권한이 없습니다.");
           window.location.href = "https://naver.com";

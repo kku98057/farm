@@ -51,6 +51,7 @@ export default function AnimalInventory() {
         },
         onSettled: () => {
           queryClient.invalidateQueries({ queryKey: ["/api/main"] });
+          queryClient.invalidateQueries({ queryKey: ["/api/animal"] });
         },
       }
     );
