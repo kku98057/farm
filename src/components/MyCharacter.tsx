@@ -6,24 +6,6 @@ import { LevelStatusType, MyAnimalType } from "../types";
 import { AnimalListStatus } from "../config/constant";
 
 import Lottie from "lottie-react";
-import {
-  cat_final,
-  chicken_final,
-  dog_final,
-  dolphin_final,
-  duck_final,
-  giraffe_final,
-  horse,
-  horse_final,
-  owl_final,
-  panda__final,
-  parrot_final,
-  quokka_final,
-  rabbit_final,
-  rion_final,
-  seaotter_final,
-  sheep_final,
-} from "../asset";
 
 export default function MyCharacter({
   setLevelStatus,
