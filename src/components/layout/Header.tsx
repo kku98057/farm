@@ -1,25 +1,16 @@
 import "swiper/css";
 
-import { gamestone, stone } from "../../asset";
+import { gamestone, point } from "../../asset";
 
 import { HeaderList } from "../../config/constant";
 import { layoutStyle, tabStyle } from "../../style";
 import { ConstantType } from "../../types";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  AtomAlarm,
-  AtomAlarmLength,
-  AtomAlarmReadLength,
-  AtomCurrency,
-  AtomHeaderTab,
-  AtomLevelPopup,
-  AtomUser,
-} from "../../store";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { AtomAlarm, AtomCurrency, AtomHeaderTab } from "../../store";
 
 export default function Header() {
-  const [userData, setUserData] = useRecoilState(AtomUser);
   const [mainCurrencyData, setMainCurrencyData] = useRecoilState(AtomCurrency);
-  console.log(mainCurrencyData);
+
   return (
     <header className={layoutStyle.header}>
       <div className={layoutStyle.header_ul}>
@@ -28,7 +19,7 @@ export default function Header() {
         ))}
         <div className={layoutStyle.header_user}>
           <div className={layoutStyle.myCurrency}>
-            <img src={stone} alt="수면포인트" />
+            <img src={point} alt="수면포인트" />
             <span>{mainCurrencyData.point.toLocaleString()}</span>
           </div>
           <div className={layoutStyle.myCurrency}>
@@ -57,7 +48,7 @@ const HeaderListUi = ({ list }: { list: ConstantType }) => {
         ""
       )}
       <div>
-        <img src={list.image} alt={list.name} />
+        <img src={list.image} alt={list.name} style={{ width: 30 }} />
       </div>
     </li>
   );

@@ -148,11 +148,17 @@ export interface FoodType {
   quantity: number;
   addExp: number;
 }
+export type AnimalSkin = {
+  [key: string]: AnimalEvolutionImgType;
+  기본: AnimalEvolutionImgType;
+  활동: AnimalEvolutionImgType;
+  수면: AnimalEvolutionImgType;
+};
 export type AnimalStatus = {
   [key: string]: AnimalEvolutionImgType;
   wakeup: AnimalEvolutionImgType;
-  sleep: AnimalEvolutionImgType;
-  active: AnimalEvolutionImgType;
+  sleeping: AnimalEvolutionImgType;
+  activity: AnimalEvolutionImgType;
 };
 export interface AnimalEvolutionImgType {
   [key: string]: {

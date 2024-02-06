@@ -29,12 +29,12 @@ import useAlarm from "../../hooks/useAlarm";
 import BackButton from "../buttons/BackButton";
 
 export default function WellTab({ tabDatas }: { tabDatas: tabDatasType }) {
-  const { data, isLoading } = useGetAxios({ url: "/api/emotion/list" });
+  const { data, isLoading } = useGetAxios({ url: "/api/game/emotion/list" });
   const [ableEmotion, setAbleEmotion] = useState(true);
   const [clickLmit, setClickLmit] = useState(10);
   const [popup, setPopup] = useRecoilState(AtomLevelPopup);
   const [poupData, setPopupData] = useState("");
-  const { mutate } = useUpdate({ url: "/api/emotion" });
+  const { mutate } = useUpdate({ url: "/api/game/emotion" });
   const [loading, setLoading] = useState(false);
   const [reaminTime, setRemainTime] = useState(0);
 

@@ -1,22 +1,12 @@
 import {
-  feed,
-  home,
   inventory,
   message,
   shop,
-  cat,
-  dog,
-  horse,
-  tiger,
   friend,
-  setting,
-  emotion,
-  foodIcon,
-  stone,
   giraffe_final,
   sheep_final,
   quokka_final,
-  panda__final,
+  panda_final,
   rion_final,
   cat_final,
   dog_final,
@@ -45,8 +35,40 @@ import {
   duck_first_base,
   rabbit_first_base,
   seaotter_first_base,
+  giraffe_sleep_final,
+  giraffe_act_final,
+  sheep_sleep_final,
+  sheep_act_final,
+  quokka_sleep_final,
+  quokka_act_final,
+  panda_act_final,
+  panda_sleep_final,
+  tiger_act_final,
+  tiger_sleep_final,
+  rion_sleep_final,
+  rion_act_final,
+  cat_sleep_final,
+  cat_act_final,
+  dog_sleep_final,
+  dog_act_final,
+  owl_sleep_final,
+  owl_act_final,
+  parrot_sleep_final,
+  parrot_act_final,
+  chicken_sleep_final,
+  chicken_act_final,
+  dolphin_sleep_final,
+  dolphin_act_final,
+  horse_sleep_final,
+  horse_act_final,
+  duck_sleep_final,
+  duck_act_final,
+  rabbit_sleep_final,
+  rabbit_act_final,
+  seaotter_sleep_final,
+  seaotter_act_final,
 } from "../asset";
-import { AnimalStatus } from "../types";
+import { AnimalSkin, AnimalStatus } from "../types";
 // export const exp = {
 //   currentExp: 0,
 //   everyExp: 0,
@@ -58,8 +80,8 @@ import { AnimalStatus } from "../types";
 //   exp: exp,
 //   image: {
 //     selected: "",
-//     active: "",
-//     sleep: "",
+//     activity: "",
+//     sleeping: "",
 //     wakeup: "",
 //   },
 // };
@@ -265,7 +287,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: giraffe_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: sheep_first_base,
         2: sheep_first_base,
@@ -285,13 +307,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: sheep_first_base,
       },
       final: {
-        1: giraffe_final,
-        2: giraffe_final,
-        3: giraffe_final,
-        4: giraffe_final,
+        1: giraffe_sleep_final,
+        2: giraffe_sleep_final,
+        3: giraffe_sleep_final,
+        4: giraffe_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: sheep_first_base,
         2: sheep_first_base,
@@ -311,10 +333,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: sheep_first_base,
       },
       final: {
-        1: giraffe_final,
-        2: giraffe_final,
-        3: giraffe_final,
-        4: giraffe_final,
+        1: giraffe_act_final,
+        2: giraffe_act_final,
+        3: giraffe_act_final,
+        4: giraffe_act_final,
       },
     },
   },
@@ -345,7 +367,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: sheep_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: sheep_first_base,
         2: sheep_first_base,
@@ -365,13 +387,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: sheep_first_base,
       },
       final: {
-        1: sheep_final,
-        2: sheep_final,
-        3: sheep_final,
-        4: sheep_final,
+        1: sheep_sleep_final,
+        2: sheep_sleep_final,
+        3: sheep_sleep_final,
+        4: sheep_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: sheep_first_base,
         2: sheep_first_base,
@@ -391,10 +413,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: sheep_first_base,
       },
       final: {
-        1: sheep_final,
-        2: sheep_final,
-        3: sheep_final,
-        4: sheep_final,
+        1: sheep_act_final,
+        2: sheep_act_final,
+        3: sheep_act_final,
+        4: sheep_act_final,
       },
     },
   },
@@ -425,7 +447,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: quokka_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: quokka_first_base,
         2: quokka_first_base,
@@ -445,13 +467,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: quokka_first_base,
       },
       final: {
-        1: quokka_final,
-        2: quokka_final,
-        3: quokka_final,
-        4: quokka_final,
+        1: quokka_sleep_final,
+        2: quokka_sleep_final,
+        3: quokka_sleep_final,
+        4: quokka_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: quokka_first_base,
         2: quokka_first_base,
@@ -471,10 +493,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: quokka_first_base,
       },
       final: {
-        1: quokka_final,
-        2: quokka_final,
-        3: quokka_final,
-        4: quokka_final,
+        1: quokka_act_final,
+        2: quokka_act_final,
+        3: quokka_act_final,
+        4: quokka_act_final,
       },
     },
   },
@@ -499,13 +521,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: panda_first_base,
       },
       final: {
-        1: panda__final,
-        2: panda__final,
-        3: panda__final,
-        4: panda__final,
+        1: panda_final,
+        2: panda_final,
+        3: panda_final,
+        4: panda_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: panda_first_base,
         2: panda_first_base,
@@ -525,13 +547,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: panda_first_base,
       },
       final: {
-        1: cat_final,
-        2: chicken_final,
-        3: duck_final,
-        4: panda__final,
+        1: panda_sleep_final,
+        2: panda_sleep_final,
+        3: panda_sleep_final,
+        4: panda_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: panda_first_base,
         2: panda_first_base,
@@ -551,10 +573,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: panda_first_base,
       },
       final: {
-        1: panda__final,
-        2: panda__final,
-        3: panda__final,
-        4: panda__final,
+        1: panda_act_final,
+        2: panda_act_final,
+        3: panda_act_final,
+        4: panda_act_final,
       },
     },
   },
@@ -585,7 +607,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: tiger_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: tiger_first_base,
         2: tiger_first_base,
@@ -605,13 +627,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: tiger_first_base,
       },
       final: {
-        1: tiger_final,
-        2: tiger_final,
-        3: tiger_final,
-        4: tiger_final,
+        1: tiger_sleep_final,
+        2: tiger_sleep_final,
+        3: tiger_sleep_final,
+        4: tiger_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: tiger_first_base,
         2: tiger_first_base,
@@ -631,10 +653,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: tiger_first_base,
       },
       final: {
-        1: tiger_final,
-        2: tiger_final,
-        3: tiger_final,
-        4: tiger_final,
+        1: tiger_act_final,
+        2: tiger_act_final,
+        3: tiger_act_final,
+        4: tiger_act_final,
       },
     },
   },
@@ -665,7 +687,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: rion_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: rion_first_base,
         2: rion_first_base,
@@ -685,13 +707,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: rion_first_base,
       },
       final: {
-        1: rion_final,
-        2: rion_final,
-        3: rion_final,
-        4: rion_final,
+        1: rion_sleep_final,
+        2: rion_sleep_final,
+        3: rion_sleep_final,
+        4: rion_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: rion_first_base,
         2: rion_first_base,
@@ -711,10 +733,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: rion_first_base,
       },
       final: {
-        1: rion_final,
-        2: rion_final,
-        3: rion_final,
-        4: rion_final,
+        1: rion_act_final,
+        2: rion_act_final,
+        3: rion_act_final,
+        4: rion_act_final,
       },
     },
   },
@@ -745,7 +767,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: cat_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: cat_first_base,
         2: cat_first_base,
@@ -765,13 +787,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: cat_first_base,
       },
       final: {
-        1: cat_final,
-        2: cat_final,
-        3: cat_final,
-        4: cat_final,
+        1: cat_sleep_final,
+        2: cat_sleep_final,
+        3: cat_sleep_final,
+        4: cat_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: cat_first_base,
         2: cat_first_base,
@@ -791,10 +813,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: cat_first_base,
       },
       final: {
-        1: cat_final,
-        2: cat_final,
-        3: cat_final,
-        4: cat_final,
+        1: cat_act_final,
+        2: cat_act_final,
+        3: cat_act_final,
+        4: cat_act_final,
       },
     },
   },
@@ -825,7 +847,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: dog_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: dog_first_base,
         2: dog_first_base,
@@ -845,13 +867,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: dog_first_base,
       },
       final: {
-        1: dog_final,
-        2: dog_final,
-        3: dog_final,
-        4: dog_final,
+        1: dog_sleep_final,
+        2: dog_sleep_final,
+        3: dog_sleep_final,
+        4: dog_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: dog_first_base,
         2: dog_first_base,
@@ -871,10 +893,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: dog_first_base,
       },
       final: {
-        1: dog_final,
-        2: dog_final,
-        3: dog_final,
-        4: dog_final,
+        1: dog_act_final,
+        2: dog_act_final,
+        3: dog_act_final,
+        4: dog_act_final,
       },
     },
   },
@@ -905,7 +927,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: owl_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: owl_first_base,
         2: owl_first_base,
@@ -925,13 +947,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: owl_first_base,
       },
       final: {
-        1: owl_final,
-        2: owl_final,
-        3: owl_final,
-        4: owl_final,
+        1: owl_sleep_final,
+        2: owl_sleep_final,
+        3: owl_sleep_final,
+        4: owl_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: owl_first_base,
         2: owl_first_base,
@@ -951,10 +973,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: owl_first_base,
       },
       final: {
-        1: owl_final,
-        2: owl_final,
-        3: owl_final,
-        4: owl_final,
+        1: owl_act_final,
+        2: owl_act_final,
+        3: owl_act_final,
+        4: owl_act_final,
       },
     },
   },
@@ -985,7 +1007,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: parrot_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: parrot_first_base,
         2: parrot_first_base,
@@ -1005,13 +1027,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: parrot_first_base,
       },
       final: {
-        1: parrot_final,
-        2: parrot_final,
-        3: parrot_final,
-        4: parrot_final,
+        1: parrot_sleep_final,
+        2: parrot_sleep_final,
+        3: parrot_sleep_final,
+        4: parrot_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: parrot_first_base,
         2: parrot_first_base,
@@ -1031,10 +1053,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: parrot_first_base,
       },
       final: {
-        1: parrot_final,
-        2: parrot_final,
-        3: parrot_final,
-        4: parrot_final,
+        1: parrot_act_final,
+        2: parrot_act_final,
+        3: parrot_act_final,
+        4: parrot_act_final,
       },
     },
   },
@@ -1065,7 +1087,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: chicken_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: chicken_first_base,
         2: chicken_first_base,
@@ -1085,13 +1107,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: chicken_first_base,
       },
       final: {
-        1: chicken_final,
-        2: chicken_final,
-        3: chicken_final,
-        4: chicken_final,
+        1: chicken_sleep_final,
+        2: chicken_sleep_final,
+        3: chicken_sleep_final,
+        4: chicken_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: chicken_first_base,
         2: chicken_first_base,
@@ -1111,10 +1133,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: chicken_first_base,
       },
       final: {
-        1: chicken_final,
-        2: chicken_final,
-        3: chicken_final,
-        4: chicken_final,
+        1: chicken_act_final,
+        2: chicken_act_final,
+        3: chicken_act_final,
+        4: chicken_act_final,
       },
     },
   },
@@ -1145,7 +1167,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: dolphin_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: dolphin_first_base,
         2: dolphin_first_base,
@@ -1165,13 +1187,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: dolphin_first_base,
       },
       final: {
-        1: dolphin_final,
-        2: dolphin_final,
-        3: dolphin_final,
-        4: dolphin_final,
+        1: dolphin_sleep_final,
+        2: dolphin_sleep_final,
+        3: dolphin_sleep_final,
+        4: dolphin_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: dolphin_first_base,
         2: dolphin_first_base,
@@ -1191,10 +1213,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: dolphin_first_base,
       },
       final: {
-        1: dolphin_final,
-        2: dolphin_final,
-        3: dolphin_final,
-        4: dolphin_final,
+        1: dolphin_act_final,
+        2: dolphin_act_final,
+        3: dolphin_act_final,
+        4: dolphin_act_final,
       },
     },
   },
@@ -1225,7 +1247,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: horse_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: horse_first_base,
         2: horse_first_base,
@@ -1245,13 +1267,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: horse_first_base,
       },
       final: {
-        1: horse_final,
-        2: horse_final,
-        3: horse_final,
-        4: horse_final,
+        1: horse_sleep_final,
+        2: horse_sleep_final,
+        3: horse_sleep_final,
+        4: horse_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: horse_first_base,
         2: horse_first_base,
@@ -1271,10 +1293,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: horse_first_base,
       },
       final: {
-        1: horse_final,
-        2: horse_final,
-        3: horse_final,
-        4: horse_final,
+        1: horse_act_final,
+        2: horse_act_final,
+        3: horse_act_final,
+        4: horse_act_final,
       },
     },
   },
@@ -1305,7 +1327,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: duck_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: duck_first_base,
         2: duck_first_base,
@@ -1325,13 +1347,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: duck_first_base,
       },
       final: {
-        1: duck_final,
-        2: duck_final,
-        3: duck_final,
-        4: duck_final,
+        1: duck_sleep_final,
+        2: duck_sleep_final,
+        3: duck_sleep_final,
+        4: duck_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: duck_first_base,
         2: duck_first_base,
@@ -1351,10 +1373,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: duck_first_base,
       },
       final: {
-        1: duck_final,
-        2: duck_final,
-        3: duck_final,
-        4: duck_final,
+        1: duck_act_final,
+        2: duck_act_final,
+        3: duck_act_final,
+        4: duck_act_final,
       },
     },
   },
@@ -1385,7 +1407,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: rabbit_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: rabbit_first_base,
         2: rabbit_first_base,
@@ -1405,13 +1427,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: rabbit_first_base,
       },
       final: {
-        1: rabbit_final,
-        2: rabbit_final,
-        3: rabbit_final,
-        4: rabbit_final,
+        1: rabbit_sleep_final,
+        2: rabbit_sleep_final,
+        3: rabbit_sleep_final,
+        4: rabbit_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: rabbit_first_base,
         2: rabbit_first_base,
@@ -1431,10 +1453,10 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: rabbit_first_base,
       },
       final: {
-        1: rabbit_final,
-        2: rabbit_final,
-        3: rabbit_final,
-        4: rabbit_final,
+        1: rabbit_act_final,
+        2: rabbit_act_final,
+        3: rabbit_act_final,
+        4: rabbit_act_final,
       },
     },
   },
@@ -1465,7 +1487,7 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: seaotter_final,
       },
     },
-    sleep: {
+    sleeping: {
       first: {
         1: seaotter_first_base,
         2: seaotter_first_base,
@@ -1485,13 +1507,13 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: seaotter_first_base,
       },
       final: {
-        1: seaotter_final,
-        2: seaotter_final,
-        3: seaotter_final,
-        4: seaotter_final,
+        1: seaotter_sleep_final,
+        2: seaotter_sleep_final,
+        3: seaotter_sleep_final,
+        4: seaotter_sleep_final,
       },
     },
-    active: {
+    activity: {
       first: {
         1: seaotter_first_base,
         2: seaotter_first_base,
@@ -1511,11 +1533,333 @@ export const AnimalListStatus: { [key: string]: AnimalStatus } = {
         4: seaotter_first_base,
       },
       final: {
-        1: seaotter_final,
-        2: seaotter_final,
-        3: seaotter_final,
-        4: seaotter_final,
+        1: seaotter_act_final,
+        2: seaotter_act_final,
+        3: seaotter_act_final,
+        4: seaotter_act_final,
       },
+    },
+  },
+};
+export const AnimalSkinModel: { [key: string | number]: AnimalSkin } = {
+  기린: {
+    기본: {
+      1: giraffe_first_base,
+      2: giraffe_first_base,
+      3: giraffe_first_base,
+      4: giraffe_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: giraffe_first_base,
+      3: giraffe_first_base,
+      4: giraffe_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: giraffe_first_base,
+      3: giraffe_first_base,
+      4: giraffe_first_base,
+    },
+  },
+  양: {
+    기본: {
+      1: sheep_first_base,
+      2: sheep_first_base,
+      3: sheep_first_base,
+      4: sheep_first_base,
+    },
+    활동: {
+      1: sheep_first_base,
+      2: sheep_first_base,
+      3: sheep_first_base,
+      4: sheep_first_base,
+    },
+    수면: {
+      1: sheep_first_base,
+      2: sheep_first_base,
+      3: sheep_first_base,
+      4: sheep_first_base,
+    },
+  },
+  쿼카: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  판다: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  호랑이: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  사자: {
+    기본: {
+      1: rion_first_base,
+      2: rion_first_base,
+      3: rion_first_base,
+      4: rion_first_base,
+    },
+    활동: {
+      1: rion_first_base,
+      2: rion_first_base,
+      3: rion_first_base,
+      4: rion_first_base,
+    },
+    수면: {
+      1: rion_first_base,
+      2: rion_first_base,
+      3: rion_first_base,
+      4: rion_first_base,
+    },
+  },
+  고양이: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  강아지: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  올빼미: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  앵무새: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  닭: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  돌고래: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  말: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  오리: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  토끼: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+  },
+  해달: {
+    기본: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    활동: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
+    },
+    수면: {
+      1: giraffe_first_base,
+      2: cat_first_base,
+      3: panda_first_base,
+      4: horse_first_base,
     },
   },
 };

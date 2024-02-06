@@ -20,7 +20,7 @@ export default function AlarmTab({
 }: {
   HeaderTabDatas: { [key: string]: string };
 }) {
-  const { data, isLoading } = useGetAxios({ url: "/api/alarm/list" });
+  const { data, isLoading } = useGetAxios({ url: "/api/game/alarm/list" });
   const [alarmList, setAlarmList] = useRecoilState(AtomAlarmList);
   const setAlarmLength = useSetRecoilState(AtomAlarmLength);
   const setAlarmReadLength = useSetRecoilState(AtomAlarmReadLength);

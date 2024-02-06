@@ -1,8 +1,8 @@
 import { buttonStyle, tabStyle } from "../../style";
-import { cat, dog, horse, panda__final, panda_first_base } from "../../asset";
+
 import { useEffect, useState } from "react";
 import ClickButton from "../buttons/ClickButton";
-import { ClickType, ActionType } from "../../types";
+import { ClickType, ActionType, MyAnimalType } from "../../types";
 import useGetAxios from "../../hooks/useGetAxios";
 import Loading from "../Loading";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
@@ -14,7 +14,10 @@ import {
 } from "../../store";
 import useUpdate from "../../hooks/useUpdate";
 import { useQueryClient } from "@tanstack/react-query";
-import { AnimalListStatus } from "../../config/constant";
+import { AnimalListStatus, AnimalSkinModel } from "../../config/constant";
+import Lottie from "lottie-react";
+import { AnyCnameRecord } from "dns";
+import { lock } from "../../asset";
 
 export default function EmotionCharactorInventory({
   tab,
@@ -28,7 +31,7 @@ export default function EmotionCharactorInventory({
   const [emotionList, setEmotionList] = useRecoilState(AtomEmotionList);
 
   const { data: ActionItem, isLoading } = useGetAxios({
-    url: "/api/inventory/animal-action",
+    url: "/api/game/inventory/animal-action",
     params: {
       animal_id: tab.animal_id,
       action_id: 0,
@@ -59,6 +62,7 @@ export default function EmotionCharactorInventory({
           <div className={tabStyle.inventory_items}>
             {emotionList.map((list: ActionType, idx: number) => (
               <List
+                key={`${list.name}_${idx}`}
                 list={list}
                 equip={equip}
                 setEquip={setEquip}
@@ -91,7 +95,7 @@ const List = ({
   const setGlobalLoading = useSetRecoilState(AtomLoading);
   const [popup, setPopup] = useRecoilState(AtomLevelPopup);
   const queryClient = useQueryClient();
-  const { mutate } = useUpdate({ url: "/api/inventory/animal-action" });
+  const { mutate } = useUpdate({ url: "/api/game/inventory/animal-action" });
   const clickHandler = (e: ClickType, id: number) => {
     e.stopPropagation();
     setClicked(id);
@@ -101,7 +105,6 @@ const List = ({
   const equipHandler = (e: ClickType, list: ActionType) => {
     e.stopPropagation();
 
-    console.log(list);
     setEquip((prev) => [...prev, list]);
     mutate(
       {
@@ -118,9 +121,9 @@ const List = ({
         },
         onSettled: () => {
           setGlobalLoading(false);
-          queryClient.invalidateQueries({ queryKey: ["/api/main"] });
+          queryClient.invalidateQueries({ queryKey: ["/api/game/main"] });
           queryClient.invalidateQueries({
-            queryKey: ["/api/inventory/animal-action"],
+            queryKey: ["/api/game/inventory/animal-action"],
           });
         },
       }
@@ -142,9 +145,21 @@ const List = ({
   };
   //잠금시 스타일
   const lockedStyle = () => {
-    return list.is_lock && <div className={tabStyle.lock_active}>잠금</div>;
+    return (
+      list.is_lock && (
+        <div className={tabStyle.lock_active}>
+          <img src={lock} alt="잠금" />
+        </div>
+      )
+    );
   };
-  console.log(list);
+
+  function getImageSrc(list: any): string {
+    const { animal, skin_code, action } = list;
+
+    return AnimalSkinModel[animal]?.[action]?.[skin_code.toString()].toString();
+  }
+
   return (
     <li
       className={`${tabStyle.tab_box} ${tabStyle.item_list} `}
@@ -154,20 +169,23 @@ const List = ({
         }
       }}
     >
-      {/* <img src={AnimalListStatus[list.animal as keyof typeof AnimalListStatus]['wakeup'][1]} alt="" /> */}
+      <img src={getImageSrc(list)} alt="" />
       {euipedStyle()} {lockedStyle()}
       <span>{list.action}</span>
-      <span>{list.animal}</span>
+      <span>{list.name}</span>
       <div
         className={`${tabStyle.equip_tab} ${
           clicked === list.action_id ? `${tabStyle.active}` : ""
         }`}
       >
-        <ClickButton
-          className={buttonStyle.equipBtn}
-          text={list.is_equip ? "장착해제" : "장착하기"}
-          clickHandler={(e) => equipHandler(e, list)}
-        />
+        {/* 기본스킨 장착해제 불가능 */}
+        {list.name !== "기본" && (
+          <ClickButton
+            className={buttonStyle.equipBtn}
+            text={list.is_equip ? "장착해제" : "장착하기"}
+            clickHandler={(e) => equipHandler(e, list)}
+          />
+        )}
 
         <ClickButton
           className={buttonStyle.equipCancelBtn}

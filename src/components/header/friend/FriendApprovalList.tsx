@@ -1,4 +1,4 @@
-import { dog, friend, stone } from "../../../asset";
+import { friend, stone } from "../../../asset";
 import { tabStyle } from "../../../style";
 
 import { useState } from "react";
@@ -18,7 +18,7 @@ export default function FriendApprovalList({ list }: { list: FriendType }) {
   const [sendItemState, setSendItemState] = useState<boolean>(true);
   const setPopup = useSetRecoilState(AtomLevelPopup);
   const setGlobalLoading = useSetRecoilState(AtomLoading);
-  const { mutate } = useUpdate({ url: "/api/friend/like" });
+  const { mutate } = useUpdate({ url: "/api/game/friend/like" });
   const setHeaderTab = useSetRecoilState(AtomHeaderTab);
 
   const gotoFriend = () => {
@@ -39,8 +39,10 @@ export default function FriendApprovalList({ list }: { list: FriendType }) {
           setPopup({ text: error.response.data.message, popup: true });
         },
         onSettled: () => {
-          queryClient.invalidateQueries({ queryKey: ["/api/friend/list"] });
-          queryClient.invalidateQueries({ queryKey: ["/api/main"] });
+          queryClient.invalidateQueries({
+            queryKey: ["/api/game/friend/list"],
+          });
+          queryClient.invalidateQueries({ queryKey: ["/api/game/main"] });
         },
       }
     );
@@ -49,7 +51,7 @@ export default function FriendApprovalList({ list }: { list: FriendType }) {
     <li className={tabStyle.friend_list}>
       <div className={tabStyle.friend_left}>
         <div className={tabStyle.friend_img}>
-          <img src={dog} alt={list.friend_name} />
+          <img src={""} alt={list.friend_name} />
         </div>
         <span className={tabStyle.friend_name}>{list.friend_name}</span>
       </div>

@@ -13,14 +13,14 @@ import Loading from "./Loading";
 export default function CreateNickname() {
   const setLoading = useSetRecoilState(AtomLoading);
   const { mutate, isSuccess, isError } = useUpdate({
-    url: "/api/user/nickname",
+    url: "/api/game/user/nickname",
     isAlert: "noAlert",
   });
   const [text, setText] = useRecoilState(AtomUserNickname);
   const [checkedNickName, setcheckedNickName] = useState("");
 
   const { data, isLoading, error } = useGetAxios({
-    url: "/api/user/check-signup",
+    url: "/api/game/user/check-signup",
   });
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,6 @@ export default function CreateNickname() {
         {
           onError: (error) => {
             setcheckedNickName("exit");
-            console.log(error);
           },
           onSuccess: () => {},
         }

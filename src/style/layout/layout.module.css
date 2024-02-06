@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
 }
 .header_btns {
   display: flex;
@@ -68,7 +68,7 @@
 }
 .footer .list img,
 .header .list img {
-  width: 50px;
+  width: 70px;
   margin: 0 auto;
 }
 .backgrund {
@@ -110,7 +110,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
   width: 100%;
 }
 .footer_list {

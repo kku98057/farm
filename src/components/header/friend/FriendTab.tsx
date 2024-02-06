@@ -15,11 +15,11 @@ export default function FriendTab({
 }) {
   const { data: friendApprovalData, isLoading: isLoadingFriendApprovalData } =
     useGetAxios({
-      url: "/api/friend/list",
+      url: "/api/game/friend/list",
       params: { status: "approval" },
     });
   const [tab, setTab] = useState("친구목록");
-  console.log(friendApprovalData);
+
   return (
     <div className={tabStyle.tab_wrap}>
       <BackButton back="" title="친구목록" />

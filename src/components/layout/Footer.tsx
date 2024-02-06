@@ -30,14 +30,9 @@ export default function Footer() {
 
 const FooterListUi = ({ list }: { list: ConstantType }) => {
   const setHeaderTab = useSetRecoilState(AtomHeaderTab);
-  const myCharacter = useRecoilValue(AtomMyCharacter);
-
-  const userData = useRecoilValue(AtomUser);
-  const setPopup = useSetRecoilState(AtomLevelPopup);
 
   const alarmLength = useRecoilValue(AtomAlarmLength);
   const alarmReadLength = useRecoilValue(AtomAlarmReadLength);
-  console.log(list.name);
   return (
     <li
       className={layoutStyle.list}
@@ -58,7 +53,7 @@ const FooterListUi = ({ list }: { list: ConstantType }) => {
       )}
 
       <div>
-        <img src={list.image} alt={list.name} />
+        <img src={list.image} alt={list.name} style={{ width: 30 }} />
       </div>
 
       {/* <span style={{ fontSize: 12, whiteSpace: "nowrap" }}>{list.name}</span> */}

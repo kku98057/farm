@@ -21,7 +21,7 @@ export default function FriendInvite() {
   const setPopup = useSetRecoilState(AtomLevelPopup);
   const queryClient = useQueryClient();
   const { addAlarmHandler } = useAlarm();
-  const { mutate } = useUpdate({ url: "/api/friend/register" });
+  const { mutate } = useUpdate({ url: "/api/game/friend/register" });
   const inviteHandler = (e: SubmitType) => {
     e.preventDefault();
     if (code === "") {
@@ -32,21 +32,20 @@ export default function FriendInvite() {
       { code: code },
       {
         onError: (error) => {
-          console.error(error);
           setPopup({ text: "정확히 입력해주세요.", popup: true });
           setLoading(false);
         },
         onSuccess: () => {
           setPopup({ text: "초대되었습니다.", popup: true });
-          // addAlarmHandler({ meg: "친구가 추가되었습니다." });
+
           setLoading(false);
         },
         onSettled: () => {
           queryClient.invalidateQueries({
-            queryKey: ["/api/friend/list"],
+            queryKey: ["/api/game/friend/list"],
           });
           queryClient.invalidateQueries({
-            queryKey: ["/api/alarm/list"],
+            queryKey: ["/api/game/alarm/list"],
           });
         },
       }
@@ -59,15 +58,13 @@ export default function FriendInvite() {
     setLoading(true);
 
     return axios
-      .get(`${process.env.REACT_APP_BASE_URL}/api/friend/invite`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/api/game/friend/invite`, {
         headers: {
           Authorization: `Bearer ${TOKEN}`,
           "Content-Type": "application/json",
         },
       })
       .then((res) => {
-        console.log(res);
-        
         navigator.clipboard
           .writeText(res.data.code)
           .then((res) => {
@@ -80,7 +77,6 @@ export default function FriendInvite() {
       })
       .catch((error) => {
         setLoading(false);
-        console.error(error);
       });
   };
   return (

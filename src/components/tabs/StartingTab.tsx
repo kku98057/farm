@@ -26,7 +26,7 @@ export default function StartingTab({
 
   const username = Cookies.get("username");
 
-  const { data, isLoading } = useGetAxios({ url: `/api/animal/list` });
+  const { data, isLoading } = useGetAxios({ url: `/api/game/animal/list` });
   const [footerTab, setFooterTab] = useRecoilState(AtomFooterTab);
   const [levelState, setLevelState] = useRecoilState(Atomlevel);
 
@@ -51,7 +51,7 @@ export default function StartingTab({
   };
 
   const { mutate, isSuccess } = useUpdate({
-    url: "/api/animal",
+    url: "/api/game/animal",
     isAlert: "noAlert",
   });
   useEffect(() => {}, []);

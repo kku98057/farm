@@ -11,7 +11,6 @@ import {
   MainAlarmType,
   MainCurrency,
 } from "./types";
-import { cat, dog, horse } from "./asset";
 
 export const AtomHeaderTab = atom<{
   name: string;
@@ -189,39 +188,6 @@ export const AtomRejectFriendList = atom<FriendType[]>({
 export const AtomApprovalFriendList = atom<FriendType[]>({
   key: "AtomApprovalFriendListKey",
   default: [],
-});
-export const AtomRecommend = atom<{ name: string; img: string }[]>({
-  key: "AtomRecommendKey",
-  default: [
-    {
-      name: "방방이",
-      img: cat,
-    },
-    {
-      name: "붕붕이",
-      img: cat,
-    },
-    {
-      name: "띨띨이",
-      img: cat,
-    },
-    {
-      name: "돌돌이",
-      img: cat,
-    },
-    {
-      name: "튼튼이",
-      img: cat,
-    },
-    {
-      name: "실실이",
-      img: cat,
-    },
-    {
-      name: "퉁퉁이",
-      img: horse,
-    },
-  ],
 });
 
 export const AtomLevelStatus = atom<LevelStatusType>({

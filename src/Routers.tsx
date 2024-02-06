@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./page/Home";
-import FriendView from "./components/header/friend/FriendView";
 
 const home = {
   index: true,

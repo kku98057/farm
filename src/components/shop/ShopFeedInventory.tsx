@@ -1,5 +1,5 @@
 import { buttonStyle, layerStyle, tabStyle } from "../../style";
-import { feed } from "../../asset";
+import { feed, rare_feed } from "../../asset";
 import { useState } from "react";
 import ClickButton from "../buttons/ClickButton";
 import { MarketItemType } from "../../types";
@@ -31,14 +31,14 @@ export default function ShopFeedInventory() {
     exp: 0,
   });
   const { data, isLoading } = useGetAxios({
-    url: "/api/market/list",
+    url: "/api/game/market/list",
     params: { category_id: 2 },
   });
 
   const [currency, setCurrency] = useRecoilState(AtomCurrency);
 
   const { mutate, isSuccess } = useUpdate({
-    url: `/api/market/purchase`,
+    url: `/api/game/market/purchase`,
   });
   const pickHandler = (list: MarketItemType, type: string) => {
     if (type === "ticket") {
@@ -61,7 +61,7 @@ export default function ShopFeedInventory() {
         {
           onError: (error) => {
             setGlobalLoading(false);
-            console.error(error);
+
             alert(error);
           },
           onSuccess: () => {
@@ -71,10 +71,10 @@ export default function ShopFeedInventory() {
           },
           onSettled: () => {
             queryClient.invalidateQueries({
-              queryKey: ["/api/inventory/feed"],
+              queryKey: ["/api/game/inventory/feed"],
             });
             queryClient.invalidateQueries({
-              queryKey: ["/api/main"],
+              queryKey: ["/api/game/main"],
             });
           },
         }
@@ -122,7 +122,10 @@ export default function ShopFeedInventory() {
         >
           <div className={tabStyle.feed_data}>
             <div className={tabStyle.feed_tab_img}>
-              <img src={feed} alt={list.name} />
+              <img
+                src={list.name === "일반먹이" ? feed : rare_feed}
+                alt={list.name}
+              />
             </div>
             <div className={tabStyle.feed_tab_data}>
               <h3>

@@ -31,16 +31,14 @@ export default function MyCharacter({
     switch (status) {
       case "wakeup":
         return "기본";
-      case "active":
+      case "activity":
         return "활동";
-      case "sleep":
-        return "잠든";
+      case "sleeping":
+        return "수면";
       default:
         return;
     }
   };
-  console.log(getImageSrc(myCharacter));
-  console.log(myCharacter);
 
   return (
     <>

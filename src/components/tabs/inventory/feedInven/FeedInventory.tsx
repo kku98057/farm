@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { buttonStyle, layerStyle, tabStyle } from "../../../../style";
-import { feed } from "../../../../asset";
+import { feed, rare_feed, ticket } from "../../../../asset";
 
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { AtomFeed, AtomLevelPopup, AtomLoading } from "../../../../store";
@@ -19,7 +19,7 @@ export default function FeedInventory() {
   const setPopup2 = useSetRecoilState(AtomLevelPopup);
   const [globalLoading, setGlobalLoading] = useRecoilState(AtomLoading);
   const [popup, setPopup] = useState<boolean>(false);
-  const [quantity, setQuantity] = useState<number>(1);
+
   const [pickItem, setPickItem] = useState<FeedType>({
     exp: 0,
     grade: 0,
@@ -28,7 +28,7 @@ export default function FeedInventory() {
     item_id: 0,
   });
 
-  const { mutate } = useUpdate({ url: "/api/inventory/feed-item" });
+  const { mutate } = useUpdate({ url: "/api/game/inventory/feed-item" });
 
   const buyTicketHandler = (list: FeedType) => {
     setPopup(true);
@@ -59,10 +59,10 @@ export default function FeedInventory() {
           },
           onSettled: () => {
             queryClient.invalidateQueries({
-              queryKey: ["/api/inventory/feed"],
+              queryKey: ["/api/game/inventory/feed"],
             });
             queryClient.invalidateQueries({
-              queryKey: ["/api/main"],
+              queryKey: ["/api/game/main"],
             });
           },
         }
@@ -79,7 +79,16 @@ export default function FeedInventory() {
         >
           <div className={tabStyle.feed_data}>
             <div className={tabStyle.feed_tab_img}>
-              <img src={feed} alt={`${list.name}_inventor`} />
+              <img
+                src={
+                  list.name === "일반먹이"
+                    ? feed
+                    : list.name === "고급먹이"
+                    ? rare_feed
+                    : ticket
+                }
+                alt={`${list.name}_inventor`}
+              />
             </div>
             <div className={tabStyle.feed_tab_data}>
               <h3>

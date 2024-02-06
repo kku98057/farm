@@ -24,7 +24,7 @@ export default function useEat() {
 
   const levelStatus = useRecoilValue(AtomLevelStatus);
   const setFeedPopup = useSetRecoilState(AtomFeedPopup);
-  const { mutate } = useUpdate({ url: "/api/animal/feed" });
+  const { mutate } = useUpdate({ url: "/api/game/animal/feed" });
 
   const eatHandler = ({
     feedId,
@@ -52,7 +52,6 @@ export default function useEat() {
           return;
         },
         onSuccess: (res) => {
-          console.log(res);
           setGlobalLoading(false);
           if (
             levelStatus.levelStatus === "evolution" ||
@@ -86,13 +85,13 @@ export default function useEat() {
 
         onSettled: (data, a) => {
           queryClient.invalidateQueries({
-            queryKey: ["/api/inventory/feed"],
+            queryKey: ["/api/game/inventory/feed"],
           });
           queryClient.invalidateQueries({
-            queryKey: ["/api/main"],
+            queryKey: ["/api/game/main"],
           });
           queryClient.invalidateQueries({
-            queryKey: ["/api/inventory/animal"],
+            queryKey: ["/api/game/inventory/animal"],
           });
         },
       }

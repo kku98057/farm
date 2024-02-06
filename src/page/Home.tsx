@@ -79,9 +79,9 @@ export default function Home() {
     }
   };
   // 데이터
-  const { data, isLoading } = useGetAxios({ url: "/api/main" });
+  const { data, isLoading } = useGetAxios({ url: "/api/game/main" });
   const { data: feedInventory, isLoading: isLoadingFeedInventory } =
-    useGetAxios({ url: "/api/inventory/feed" });
+    useGetAxios({ url: "/api/game/inventory/feed" });
 
   // 메인데이터
   useEffect(() => {

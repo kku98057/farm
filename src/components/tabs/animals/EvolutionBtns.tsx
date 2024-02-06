@@ -38,7 +38,7 @@ export default function EvolutionBtns({
   const setLoading = useSetRecoilState(AtomLoading);
   const queryClient = useQueryClient();
   const { mutate: evolutionMutate } = useUpdate({
-    url: "/api/animal/revolution",
+    url: "/api/game/animal/revolution",
   });
   const [levelStatus, setLevelStatus] = useRecoilState(AtomLevelStatus);
   const [myCharacter, setMyCharacter] = useRecoilState(AtomMyCharacter);
@@ -53,15 +53,13 @@ export default function EvolutionBtns({
 
       {
         onSuccess: (res) => {
-          console.log(res);
           setLoading(false);
         },
         onError: (error) => {
-          console.error(error);
           setLoading(false);
         },
         onSettled: () => {
-          queryClient.invalidateQueries({ queryKey: ["/api/main"] });
+          queryClient.invalidateQueries({ queryKey: ["/api/game/main"] });
         },
       }
     );

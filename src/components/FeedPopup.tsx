@@ -1,5 +1,5 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { feed } from "../asset";
+import { feed, rare_feed } from "../asset";
 import Popup from "./Popup";
 import { AtomFeed, AtomFeedPopup, AtomLoading } from "../store";
 import { buttonStyle, tabStyle } from "../style";
@@ -12,7 +12,6 @@ export default function FeedPopup() {
   const setFeedPopup = useSetRecoilState(AtomFeedPopup);
   const [delay, setDelay] = useState(false);
   const [globalLoading, setGlobalLoading] = useRecoilState(AtomLoading);
-  console.log(myFeed);
 
   const { eatHandler, popup, popupData, setPopup } = useEat();
 
@@ -34,7 +33,6 @@ export default function FeedPopup() {
 
   const myFeedList = () => {
     return myFeed.map((list) => {
-      console.log(list);
       if (list.name === "교환권") return;
       return (
         <div className="btns2" key={`${list.name}_feedPopup`}>
@@ -44,7 +42,10 @@ export default function FeedPopup() {
               giveToFeed(list.item_id, list.quantity, list.name, list.exp)
             }
           >
-            <img src={feed} alt={list.name} />
+            <img
+              src={list.name === "일반먹이" ? feed : rare_feed}
+              alt={list.name}
+            />
             <div className={tabStyle.feed_select_data}>
               <span>수량:{list.quantity}</span>
               <span>

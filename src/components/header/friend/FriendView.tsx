@@ -2,25 +2,23 @@ import { useRecoilValue } from "recoil";
 import useGetAxios from "../../../hooks/useGetAxios";
 import { scoreStyle, tabStyle } from "../../../style";
 import {
-  LevelStatusType,
-  MyAnimalType,
   MyFriendAnimalViewType,
   MyFriendViewType,
   tabDatasType,
 } from "../../../types";
 import BackButton from "../../buttons/BackButton";
 import { AtomHeaderTab } from "../../../store";
-import SleepScore from "../../score/SleepScore";
+
 import Lottie from "lottie-react";
 import { AnimalListStatus } from "../../../config/constant";
 
 export default function FriendView({ tabDatas }: { tabDatas: tabDatasType }) {
   const headerTab = useRecoilValue(AtomHeaderTab);
   const { data, isLoading } = useGetAxios({
-    url: "/api/friend/detail",
+    url: "/api/game/friend/detail",
     params: { friend_id: headerTab.params?.friend_id },
   });
-  console.log(data);
+
   return (
     <>
       <div className={tabStyle.tab_wrap}>
@@ -113,8 +111,6 @@ function AnimalStatList({
   );
 }
 function FriendCharacter({ data }: { data: MyFriendAnimalViewType }) {
-  console.clear();
-  console.log(data);
   function getImageSrc(character: MyFriendAnimalViewType): string {
     const { name, status, evolution_status, action } = character;
     const skinFilter = action?.filter(
@@ -129,7 +125,6 @@ function FriendCharacter({ data }: { data: MyFriendAnimalViewType }) {
     );
   }
   const transformStatus = (status: string) => {
-    console.log(status);
     switch (status) {
       case "wakeup":
         return "기본";

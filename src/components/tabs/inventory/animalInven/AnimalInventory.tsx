@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { buttonStyle, tabStyle } from "../../../../style";
-import { AnimalsType, ClickType, SubmitType } from "../../../../types";
+import { AnimalsType, ClickType } from "../../../../types";
 import Loading from "../../../Loading";
-import SubmitButton from "../../../buttons/SubmitButton";
+
 import AnimalsList from "../../animals/AnimalsList";
 import useGetAxios from "../../../../hooks/useGetAxios";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -16,10 +16,10 @@ export default function AnimalInventory() {
 
   const [headerTab, setHeaderTab] = useRecoilState(AtomHeaderTab);
   const { data: animalsData, isLoading: isLoadingAnimalsData } = useGetAxios({
-    url: `/api/inventory/animal`,
+    url: `/api/game/inventory/animal`,
   });
   const myCharacter = useRecoilValue(AtomMyCharacter);
-  const { mutate } = useUpdate({ url: "/api/animal", isAlert: "noAlert" });
+  const { mutate } = useUpdate({ url: "/api/game/animal", isAlert: "noAlert" });
   const [animalClicked, setAnimalClicked] = useState<{
     name: string;
     image: string | null;
@@ -46,12 +46,10 @@ export default function AnimalInventory() {
         onSuccess: () => {
           setHeaderTab({ name: "" });
         },
-        onError: (error) => {
-          console.error(error);
-        },
+        onError: (error) => {},
         onSettled: () => {
-          queryClient.invalidateQueries({ queryKey: ["/api/main"] });
-          queryClient.invalidateQueries({ queryKey: ["/api/animal"] });
+          queryClient.invalidateQueries({ queryKey: ["/api/game/main"] });
+          queryClient.invalidateQueries({ queryKey: ["/api/game/animal"] });
         },
       }
     );
